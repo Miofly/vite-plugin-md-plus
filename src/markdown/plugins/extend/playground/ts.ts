@@ -1,4 +1,4 @@
-import { isPlainObject } from 'lodash-es';
+import { isPlainObject } from 'lodash';
 import type { PlaygroundData, PlaygroundOptions, TSPresetPlaygroundOptions } from '../../../types';
 import { deepAssign } from '../../../utils/deepAssign';
 import { compressToEncodedURIComponent } from './ventors/lzstring';

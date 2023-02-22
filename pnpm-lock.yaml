@@ -27,6 +27,7 @@ specifiers:
   escape-html: ^1.0.3
   fflate: ^0.7.4
   hash-sum: ^2.0.0
+  lodash: ^4.17.21
   markdown-it: ^13.0.1
   markdown-it-anchor: ^8.6.6
   markdown-it-attrs: ^4.1.6
@@ -51,6 +52,7 @@ dependencies:
   escape-html: 1.0.3
   fflate: registry.npmmirror.com/fflate/0.7.4
   hash-sum: registry.npmmirror.com/hash-sum/2.0.0
+  lodash: registry.npmmirror.com/lodash/4.17.21
   markdown-it: registry.npmmirror.com/markdown-it/13.0.1
   markdown-it-anchor: registry.npmmirror.com/markdown-it-anchor/8.6.7_ea7kj7wzjkld5jo2noyjqxi764
   markdown-it-attrs: registry.npmmirror.com/markdown-it-attrs/4.1.6_markdown-it@13.0.1
@@ -887,6 +889,12 @@ packages:
     version: 4.0.1
     dependencies:
       uc.micro: registry.npmmirror.com/uc.micro/1.0.6
+
+  registry.npmmirror.com/lodash/4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz}
+    name: lodash
+    version: 4.17.21
+    dev: false
 
   registry.npmmirror.com/magic-string/0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/magic-string/-/magic-string-0.27.0.tgz}
