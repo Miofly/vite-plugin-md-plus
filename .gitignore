@@ -4,6 +4,7 @@ dist
 *-dist
 .cache
 es
+cjs
 
 .turbo
 .local

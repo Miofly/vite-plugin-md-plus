@@ -33,16 +33,17 @@
     "rollup": "^3.17.2",
     "rollup-plugin-esbuild": "^5.0.0",
     "upath": "^2.0.1",
-    "uslug": "^1.0.4"
-  },
-  "devDependencies": {
+    "uslug": "^1.0.4",
+    "mdurl": "^1.0.1",
     "@mdit-vue/plugin-component": "^0.11.2",
     "@mdit-vue/plugin-frontmatter": "^0.11.1",
     "@mdit-vue/plugin-headers": "^0.11.2",
     "@mdit-vue/plugin-sfc": "^0.11.1",
     "@mdit-vue/plugin-title": "^0.11.2",
     "@mdit-vue/plugin-toc": "^0.11.2",
-    "@mdit-vue/shared": "^0.11.2",
+    "@mdit-vue/shared": "^0.11.2"
+  },
+  "devDependencies": {
     "@mdit-vue/types": "^0.11.0",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-json": "^6.0.0",
@@ -53,10 +54,7 @@
     "@types/markdown-it-attrs": "^4.1.0",
     "@types/markdown-it-container": "^2.0.5",
     "@types/markdown-it-emoji": "^2.0.2",
-    "@types/mdurl": "^1.0.2",
-    "mdurl": "^1.0.1",
-    "rimraf": "^4.1.2",
-    "shiki": "^0.12.1"
+    "@types/mdurl": "^1.0.2"
   },
   "publishConfig": {
     "access": "public",
