@@ -7,7 +7,10 @@
   "scripts": {
     "prebuild": "rimraf -rf dist",
     "build": "rollup -c",
-    "pub": "pnpm build && pnpm version patch && npm publish"
+    "pub": "pnpm build && pnpm version patch && npm publish",
+    "clean": "pnpm /^clean:/",
+    "clean:dist": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules"
   },
   "files": [
     "cjs",
