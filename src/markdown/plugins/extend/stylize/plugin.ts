@@ -1,6 +1,6 @@
 import type { PluginWithOptions } from 'markdown-it';
 import type Token from 'markdown-it/lib/token';
-import type { MarkdownItStylizeOptions, MarkdownItStylizeConfig } from './options';
+import type { MarkdownItStylizeConfig, MarkdownItStylizeOptions } from './options';
 
 const scanTokens = (tokens: Token[], config: MarkdownItStylizeConfig[], skipContents: string[] = []): void => {
   for (let index = 1, len = tokens.length; index < len - 1; index++) {

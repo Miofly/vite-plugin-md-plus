@@ -2,16 +2,16 @@
  * Forked from https://github.com/markdown-it/markdown-it-footnote/blob/master/index.js
  */
 
-import Token from 'markdown-it/lib/token';
+import type { PluginSimple } from 'markdown-it';
 import parseLinkLabel from 'markdown-it/lib/helpers/parse_link_label';
+import type { RuleBlock } from 'markdown-it/lib/parser_block';
+import type { RuleInline } from 'markdown-it/lib/parser_inline';
 
 import type Renderer from 'markdown-it/lib/renderer';
 import type StateBlock from 'markdown-it/lib/rules_block/state_block';
 import type StateCore from 'markdown-it/lib/rules_core/state_core';
 import type StateInline from 'markdown-it/lib/rules_inline/state_inline';
-import type { PluginSimple } from 'markdown-it';
-import type { RuleBlock } from 'markdown-it/lib/parser_block';
-import type { RuleInline } from 'markdown-it/lib/parser_inline';
+import Token from 'markdown-it/lib/token';
 import type { FootNoteEnv, FootNoteToken } from './types';
 
 interface FootNoteStateBlock extends StateBlock {

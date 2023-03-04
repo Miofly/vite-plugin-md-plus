@@ -1,6 +1,5 @@
-import { container } from './basic/container';
-
 import type { PluginSimple } from 'markdown-it';
+import { container } from './basic/container';
 
 export const align: PluginSimple = (md) => {
   ['left', 'center', 'right', 'justify'].forEach((name) =>

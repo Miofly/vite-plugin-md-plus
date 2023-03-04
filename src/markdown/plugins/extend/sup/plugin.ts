@@ -2,10 +2,9 @@
  * Forked from https://github.com/markdown-it/markdown-it-sup/blob/master/index.js
  */
 
-import { UNESCAPE_RE } from './utils';
-
 import type { PluginSimple } from 'markdown-it';
 import type { RuleInline } from 'markdown-it/lib/parser_inline';
+import { UNESCAPE_RE } from './utils';
 
 const superscriptRender: RuleInline = (state, silent) => {
   let found;

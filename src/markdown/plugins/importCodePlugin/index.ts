@@ -1,5 +1,4 @@
 import type { PluginWithOptions } from 'markdown-it';
-import path from 'path';
 import type { MarkdownEnv } from '../../types';
 import { createImportCodeBlockRule } from './createImportCodeBlockRule';
 import { resolveImportCode } from './resolveImportCode';

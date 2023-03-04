@@ -1,13 +1,12 @@
-import fs from 'node:fs';
-import path from 'upath';
-import { NEWLINES_RE, dedent } from './utils';
-
 import type { PluginWithOptions } from 'markdown-it';
 import type { RuleBlock } from 'markdown-it/lib/parser_block';
 import type { RuleCore } from 'markdown-it/lib/parser_core';
 import type Token from 'markdown-it/lib/token';
+import fs from 'node:fs';
+import path from 'upath';
 import type { MarkdownItIncludeOptions } from './options';
 import type { IncludeEnv } from './types';
+import { dedent, NEWLINES_RE } from './utils';
 
 interface ImportFileLineInfo {
   filePath: string;

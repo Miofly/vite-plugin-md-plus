@@ -1,4 +1,4 @@
-import { SiteData, PageData, LocaleConfig, HeadConfig } from '../types/shared';
+import { HeadConfig, LocaleConfig, PageData, SiteData } from '../types/shared';
 
 export type { SiteData, PageData, HeadConfig, LocaleConfig, Header, DefaultTheme, PageDataPayload, CleanUrlsMode } from '../types/shared';
 

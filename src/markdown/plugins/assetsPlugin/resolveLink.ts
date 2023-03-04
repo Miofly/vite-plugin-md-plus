@@ -1,5 +1,5 @@
-import path from 'upath';
 import { decode } from 'mdurl';
+import path from 'upath';
 import type { MarkdownEnv } from '../../types';
 
 export const resolveLink = (link: string, relativePathPrefix: string, env: MarkdownEnv): string => {

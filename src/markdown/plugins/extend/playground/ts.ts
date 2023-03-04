@@ -1,10 +1,10 @@
 import { isPlainObject } from 'lodash';
+
+import type { CompilerOptions } from 'typescript';
 import type { PlaygroundData, PlaygroundOptions, TSPresetPlaygroundOptions } from '../../../types';
 import { deepAssign } from '../../../utils/deepAssign';
 import { compressToEncodedURIComponent } from './ventors/lzstring';
 import { optionDeclarations } from './ventors/optionDelcarations';
-
-import type { CompilerOptions } from 'typescript';
 
 /** Gets a query string representation (hash + queries) */
 export const getURL = (code: string, compilerOptions: CompilerOptions = {}): string => {

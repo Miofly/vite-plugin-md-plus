@@ -1,5 +1,5 @@
-import path from 'upath';
 import type { RuleBlock } from 'markdown-it/lib/parser_block';
+import path from 'upath';
 import type { ImportCodePluginOptions } from './index';
 import type { ImportCodeTokenMeta } from './types';
 

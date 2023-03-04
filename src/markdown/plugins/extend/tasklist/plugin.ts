@@ -2,13 +2,12 @@
  * Forked from https://github.com/linsir/markdown-it-task-checkbox/blob/master/index.js
  */
 
-import Token from 'markdown-it/lib/token';
-import { getParentTokenIndex, isInlineToken, isParagraphToken, isListItemToken, setTokenAttr } from './utils';
-
 import type { PluginWithOptions } from 'markdown-it';
 import type StateCore from 'markdown-it/lib/rules_core/state_core';
+import Token from 'markdown-it/lib/token';
 import type { MarkdownItTaskListOptions } from './options';
 import type { TaskListEnv } from './types';
+import { getParentTokenIndex, isInlineToken, isListItemToken, isParagraphToken, setTokenAttr } from './utils';
 
 interface TaskListStateCore extends StateCore {
   env: TaskListEnv;

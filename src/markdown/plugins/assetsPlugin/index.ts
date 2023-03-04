@@ -7,7 +7,7 @@ export interface AssetsPluginOptions {
   /**
    * Prefix to add to relative assets links
    */
-  relativePathPrefix?: string
+  relativePathPrefix?: string;
 }
 
 /**

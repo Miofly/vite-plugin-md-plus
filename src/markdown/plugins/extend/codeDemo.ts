@@ -1,8 +1,7 @@
-import { container } from './basic/container';
-
 import type { PluginSimple } from 'markdown-it';
 import type Token from 'markdown-it/lib/token';
 import { utoa } from '../../utils/utils';
+import { container } from './basic/container';
 
 export const CODE_DEMO_DEFAULT_SETTING = {
   useBabel: false,

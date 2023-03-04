@@ -1,6 +1,6 @@
+import type { PluginSimple } from 'markdown-it';
 import type { PlaygroundData, VuePlaygroundOptions } from '../../types';
 import { playground } from './playground/index';
-import type { PluginSimple } from 'markdown-it';
 
 export const DEFAULT_VUE_PLAYGROUND_OPTIONS: VuePlaygroundOptions = {
   autoResize: true,

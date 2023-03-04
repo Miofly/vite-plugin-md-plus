@@ -1,8 +1,8 @@
-import { container } from './basic/container';
 import type { PluginWithOptions } from 'markdown-it';
 import { MarkdownEnv } from '../../types';
 import { ensureLeadingSlash } from '../../utils/ensureLeadingSlash';
 import { resolveLocalePath } from '../../utils/resolveLocalePath';
+import { container } from './basic/container';
 
 export const hint: PluginWithOptions = (md, options = {}) => {
   const containers: any[] = ['info', 'note', 'tip', 'warning', 'danger'];

@@ -1,38 +1,6 @@
 import { slugify as defaultSlugify } from '@mdit-vue/shared';
 import MarkdownIt from 'markdown-it';
 
-import {
-  anchorPlugin,
-  assetsPlugin,
-  codePlugin,
-  componentPlugin,
-  emojiPlugin,
-  frontmatterPlugin,
-  headersPlugin,
-  highlight,
-  importCodePlugin,
-  linksPlugin,
-  sfcPlugin,
-  titlePlugin,
-  tocPlugin,
-  codeTabs,
-  tabs,
-  mark,
-  hint,
-  sup,
-  sub,
-  align,
-  tasklist,
-  figure,
-  imgSize,
-  imgMark,
-  imgLazyload,
-  vuePlayground,
-  playground,
-  normalDemo,
-  reactDemo,
-  vueDemo
-} from './plugins';
 import type {
   AnchorPluginOptions,
   AssetsPluginOptions,
@@ -44,6 +12,38 @@ import type {
   LinksPluginOptions,
   SfcPluginOptions,
   TocPluginOptions
+} from './plugins';
+import {
+  align,
+  anchorPlugin,
+  assetsPlugin,
+  codePlugin,
+  codeTabs,
+  componentPlugin,
+  emojiPlugin,
+  figure,
+  frontmatterPlugin,
+  headersPlugin,
+  highlight,
+  hint,
+  imgLazyload,
+  imgMark,
+  imgSize,
+  importCodePlugin,
+  linksPlugin,
+  mark,
+  normalDemo,
+  playground,
+  reactDemo,
+  sfcPlugin,
+  sub,
+  sup,
+  tabs,
+  tasklist,
+  titlePlugin,
+  tocPlugin,
+  vueDemo,
+  vuePlayground
 } from './plugins';
 import type { Markdown, MarkdownOptions } from './types';
 

@@ -2,10 +2,10 @@
  * Forked from https://github.com/waylonflinn/markdown-it-katex/blob/master/index.js
  */
 
-import type StateInline from 'markdown-it/lib/rules_inline/state_inline';
 import type { PluginWithOptions } from 'markdown-it';
-import type { RuleInline } from 'markdown-it/lib/parser_inline';
 import type { RuleBlock } from 'markdown-it/lib/parser_block';
+import type { RuleInline } from 'markdown-it/lib/parser_inline';
+import type StateInline from 'markdown-it/lib/rules_inline/state_inline';
 import type { MarkdownItTexOptions } from './options';
 
 /*

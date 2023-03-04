@@ -1,9 +1,9 @@
-import { createMarkdownRenderer } from './markdown/markdown';
 import type { Plugin } from 'vite';
+import { createMarkdownRenderer } from './markdown/markdown';
 
 async function createMarkdown(options: any) {
   const { markdown = {} } = options;
-  
+
   const md = await createMarkdownRenderer(markdown);
   if (options.markdown && options.markdown.init) options.markdown.init({ md });
 
@@ -20,7 +20,7 @@ async function createMarkdown(options: any) {
     }
 
     if (transforms.after) result = transforms.after({ result, source, file, md });
-    
+
     return result;
   };
 }

@@ -3,9 +3,9 @@
  */
 
 import type { Options, PluginWithOptions } from 'markdown-it';
-import type Token from 'markdown-it/lib/token';
-import type Renderer from 'markdown-it/lib/renderer';
 import type { RuleBlock } from 'markdown-it/lib/parser_block';
+import type Renderer from 'markdown-it/lib/renderer';
+import type Token from 'markdown-it/lib/token';
 import type { MarkdownItContainerOptions } from './options';
 
 export const container: PluginWithOptions<MarkdownItContainerOptions> = (
