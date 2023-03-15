@@ -27,7 +27,7 @@ const encodeFiles = (files: PlaygroundData['files']): string =>
 export const vuePlayground: PluginSimple = (md) => {
   md.use(playground, {
     name: 'vue-playground',
-    component: 'MdVuePlayground',
+    component: 'VftMdVuePlayground',
     propsGetter: ({ title = '', key, files, settings }: PlaygroundData) => ({
       title,
       key,

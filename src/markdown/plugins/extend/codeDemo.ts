@@ -38,10 +38,10 @@ const getPlugin =
         }
 
         return `
-<MdCodeDemo id="code-demo-${index}" type="${name.split('-')[0]}"${title ? ` title="${encodeURIComponent(title)}"` : ''}${config ? ` config="${config}"` : ''} code="${utoa(JSON.stringify(code))}">
+<VftMdCodeDemo id="code-demo-${index}" type="${name.split('-')[0]}"${title ? ` title="${encodeURIComponent(title)}"` : ''}${config ? ` config="${config}"` : ''} code="${utoa(JSON.stringify(code))}">
 `;
       },
-      closeRender: () => '</MdCodeDemo>'
+      closeRender: () => '</VftMdCodeDemo>'
     });
 
 export const normalDemo: PluginSimple = getPlugin('normal-demo');
