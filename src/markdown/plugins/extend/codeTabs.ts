@@ -13,7 +13,7 @@ export const codeTabs: PluginSimple = (md) => {
         ...(id ? { id } : {})
       }));
 
-      return `<MdCodeTabs id="${index}" :data='${
+      return `<VftMdCodeTabs id="${index}" :data='${
         // single quote will break @vue/compiler-sfc
         JSON.stringify(tabData).replace(/'/g, '&#39')
       }'${active !== -1 ? ` :active="${active}"` : ''}${
@@ -24,7 +24,7 @@ export const codeTabs: PluginSimple = (md) => {
     },
 
     tabsCloseRenderer: () => `\
-</MdCodeTabs>
+</VftMdCodeTabs>
 `,
 
     tabOpenRenderer: ({ index }, tokens, tokenIndex) => {
