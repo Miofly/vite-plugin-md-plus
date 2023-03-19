@@ -5,7 +5,7 @@ import os from 'os';
 import * as process from 'process';
 import { createMarkdownRenderer } from './markdown/markdown';
 import fs from 'fs-extra';
-import path, { resolve, join, basename } from 'path';
+import path, { join, basename } from 'path';
 
 async function createMarkdown (options: any) {
   const { markdown = {} } = options;
