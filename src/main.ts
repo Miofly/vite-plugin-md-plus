@@ -47,7 +47,7 @@ async function markdownPlugin (userOptions = {}) {
       const filePath = join(process.cwd(), id);
       const fileContent = fs.readFileSync(filePath, 'utf8');
       const frontMatter = matter(fileContent, {});
-      
+  
       if (Object.keys(frontMatter.data).length === 0) {
         // const dateStr = dateFormat(getBirthtime(stat)); // 文件的创建时间
         const stat = fs.statSync(filePath);
@@ -64,7 +64,7 @@ tags:
   - `;
         const fmData = `---
 title: ${basename(filePath).split('.')[1]}
-date: ${formatToDateTime(stat.birthtime)}
+date: ${formatToDateTime(stat.ctime)}
 path: /pages/${buildShortUUID(10)}${cateStr}${tagsStr}
 ---\n`;
         fs.writeFileSync(filePath, `${fmData}${frontMatter.content}`); // 写入
