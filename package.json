@@ -8,6 +8,7 @@
     "prebuild": "rimraf -rf dist",
     "build": "rollup -c",
     "stub": "rollup -c",
+    "dev": "rollup -c",
     "pub": "pnpm build && pnpm version patch && npm publish",
     "clean": "pnpm /^clean:/",
     "clean:dist": "rimraf dist",
