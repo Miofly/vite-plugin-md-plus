@@ -9,7 +9,7 @@
     "build": "rollup -c",
     "stub": "rollup -c",
     "dev": "rollup -c",
-    "pub": "pnpm build && git add . && git commit -m 'perl: update' && tsx ../../scripts/build/src/publish.ts --pkg vite-plugin/vite-plugin-md-plus",
+    "pub": "pnpm build && tsx ../../scripts/build/src/publish.ts --pkg vite-plugin/vite-plugin-md-plus",
     "clean": "pnpm /^clean:/",
     "clean:dist": "rimraf dist",
     "clean:node_modules": "rimraf node_modules"
