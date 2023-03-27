@@ -1,5 +1,6 @@
 import { slugify as defaultSlugify } from '@mdit-vue/shared';
 import MarkdownIt from 'markdown-it';
+import { include } from '@mdit/plugin-include';
 
 import type {
   AnchorPluginOptions,
@@ -184,6 +185,7 @@ export const createMarkdownRenderer = ({
   md.use(normalDemo);
   md.use(reactDemo);
   md.use(vueDemo);
+  md.use(include);
 
   const render = md.render;
   const wrappedRender = (src: string) => {
