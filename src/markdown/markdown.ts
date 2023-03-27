@@ -185,7 +185,9 @@ export const createMarkdownRenderer = ({
   md.use(normalDemo);
   md.use(reactDemo);
   md.use(vueDemo);
-  md.use(include);
+  md.use(include, {
+    currentPath: (env: any) => env.filePath
+  });
 
   const render = md.render;
   const wrappedRender = (src: string) => {
