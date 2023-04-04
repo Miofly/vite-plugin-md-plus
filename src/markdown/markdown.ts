@@ -67,7 +67,6 @@ export const createMarkdownRenderer = ({
   toc,
   ...markdownItOptions
 }: MarkdownOptions = {}): Markdown => {
-  console.log(container, 'containercontainercontainercontainer');
   const md = MarkdownIt({
     // 在源码中启用 HTML 标签
     html: true,

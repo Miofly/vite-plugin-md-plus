@@ -2,6 +2,7 @@ import type { PluginWithOptions } from 'markdown-it';
 import type { MarkdownEnv } from '../../types';
 import { createImportCodeBlockRule } from './createImportCodeBlockRule';
 import { resolveImportCode } from './resolveImportCode';
+import { resolve } from 'path';
 
 export interface ImportCodePluginOptions {
   /**
@@ -21,7 +22,8 @@ export const importCodePlugin: PluginWithOptions<ImportCodePluginOptions> = (md,
     const token = tokens[idx];
 
     // use imported code as token content
-    const { importFilePath, importCode } = resolveImportCode(token.meta, env);
+    const { importFilePath, importCode } =
+      resolveImportCode(token.meta, resolve(process.cwd(), 'src'));
     token.content = importCode;
 
     // extract imported files to env
