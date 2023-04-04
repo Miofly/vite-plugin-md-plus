@@ -67,6 +67,7 @@ export const createMarkdownRenderer = ({
   toc,
   ...markdownItOptions
 }: MarkdownOptions = {}): Markdown => {
+  console.log(container, 'containercontainercontainercontainer');
   const md = MarkdownIt({
     // 在源码中启用 HTML 标签
     html: true,
@@ -167,7 +168,6 @@ export const createMarkdownRenderer = ({
   if (title !== false) {
     md.use(titlePlugin);
   }
-
   md.use(mark);
   md.use(hint);
   md.use(tabs);
