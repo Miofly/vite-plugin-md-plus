@@ -58,12 +58,24 @@ async function markdownPlugin (userOptions = {}) {
           cateLabelStr += os.EOL + '  - ' + item;
         });
   
-        const cateStr = os.EOL + 'category:' + cateLabelStr;
-        const tagsStr = `
+        
+        let title;
+        let tagsStr;
+        const fileTitleArr = basename(filePath).split('.');
+        if (fileTitleArr?.length > 2) {
+          title = fileTitleArr[1];
+          tagsStr = `
 tags:
   - `;
+        } else {
+          title = fileTitleArr[0];
+          tagsStr = '';
+        }
+        
+        const cateStr = cateLabelStr ? os.EOL + 'category:' + cateLabelStr : '';
+
         const fmData = `---
-title: ${basename(filePath).split('.')[1]}
+title: ${title}
 date: ${formatToDateTime(stat.ctime)}
 path: /pages/${buildShortUUID(10)}${cateStr}${tagsStr}
 ---\n`;
