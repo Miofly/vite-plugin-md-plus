@@ -61,15 +61,18 @@ async function markdownPlugin (userOptions = {}) {
         
         let title;
         let tagsStr;
+        let path;
         const fileTitleArr = basename(filePath).split('.');
         if (fileTitleArr?.length > 2) {
           title = fileTitleArr[1];
           tagsStr = `
 tags:
   - `;
+          path = buildShortUUID(10)
         } else {
           title = fileTitleArr[0];
           tagsStr = '';
+          path = fileTitleArr[0]
         }
         
         const cateStr = cateLabelStr ? os.EOL + 'category:' + cateLabelStr : '';
@@ -77,7 +80,7 @@ tags:
         const fmData = `---
 title: ${title}
 date: ${formatToDateTime(stat.ctime)}
-path: /pages/${buildShortUUID(10)}${cateStr}${tagsStr}
+path: /pages/${path}${cateStr}${tagsStr}
 ---\n`;
         fs.writeFileSync(filePath, `${fmData}${frontMatter.content}`); // 写入
       }
