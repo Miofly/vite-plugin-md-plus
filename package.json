@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-md-plus",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "main": "cjs/main.cjs",
   "module": "es/main.js",
   "type": "module",
