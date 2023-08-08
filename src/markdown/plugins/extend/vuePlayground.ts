@@ -24,7 +24,7 @@ const encodeFiles = (files: PlaygroundData['files']): string =>
     )
   ).toString('base64');
 
-export const vuePlayground: PluginSimple = (md) => {
+export const vuePlayground: PluginSimple = md => {
   md.use(playground, {
     name: 'vue-playground',
     component: 'VftMdVuePlayground',

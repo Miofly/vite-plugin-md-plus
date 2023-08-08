@@ -33,7 +33,12 @@ const getIDSuffix = (tokens: FootNoteToken[], index: number): string =>
   // add suffix when multiple id was found
   tokens[index].meta.subId > 0 ? `:${tokens[index].meta.subId}` : '';
 
-const renderFootnoteAnchorName: Renderer.RenderRule = (tokens: FootNoteToken[], index, _options, env: FootNoteEnv): string =>
+const renderFootnoteAnchorName: Renderer.RenderRule = (
+  tokens: FootNoteToken[],
+  index,
+  _options,
+  env: FootNoteEnv
+): string =>
   `${
     // prefix
     typeof env.docId === 'string' ? `-${env.docId}-` : ''
@@ -48,24 +53,50 @@ const renderFootnoteCaption: Renderer.RenderRule = (tokens: FootNoteToken[], ind
     (tokens[index].meta.id + 1).toString()
   }${getIDSuffix(tokens, index)}]`;
 
-const renderFootnoteRef: Renderer.RenderRule = (tokens: FootNoteToken[], index, options, env: FootNoteEnv, self): string => {
+const renderFootnoteRef: Renderer.RenderRule = (
+  tokens: FootNoteToken[],
+  index,
+  options,
+  env: FootNoteEnv,
+  self
+): string => {
   const id = self.rules['footnoteAnchorName']!(tokens, index, options, env, self);
   const caption = self.rules['footnoteCaption']!(tokens, index, options, env, self);
 
-  return `<sup class="footnote-ref"><a href="#footnote${id}">${caption}</a><a class="footnote-anchor" id="footnote-ref${id}${getIDSuffix(tokens, index)}" /></sup>`;
+  return `<sup class="footnote-ref"><a href="#footnote${id}">${caption}</a><a class="footnote-anchor" id="footnote-ref${id}${getIDSuffix(
+    tokens,
+    index
+  )}" /></sup>`;
 };
 
 const renderFootnoteBlockOpen: Renderer.RenderRule = (_tokens: FootNoteToken[], _index, options): string =>
-  `${options.xhtmlOut ? '<hr class="footnotes-sep" />\n' : '<hr class="footnotes-sep">\n'}<section class="footnotes">\n<ol class="footnotes-list">\n`;
+  `${
+    options.xhtmlOut ? '<hr class="footnotes-sep" />\n' : '<hr class="footnotes-sep">\n'
+  }<section class="footnotes">\n<ol class="footnotes-list">\n`;
 
 const renderFootnoteBlockClose = (): string => '</ol>\n</section>\n';
 
-const renderFootnoteOpen: Renderer.RenderRule = (tokens: FootNoteToken[], index, options, env: FootNoteEnv, self): string =>
-  `<li id="footnote${self.rules['footnoteAnchorName']!(tokens, index, options, env, self)}${getIDSuffix(tokens, index)}" class="footnote-item">`;
+const renderFootnoteOpen: Renderer.RenderRule = (
+  tokens: FootNoteToken[],
+  index,
+  options,
+  env: FootNoteEnv,
+  self
+): string =>
+  `<li id="footnote${self.rules['footnoteAnchorName']!(tokens, index, options, env, self)}${getIDSuffix(
+    tokens,
+    index
+  )}" class="footnote-item">`;
 
 const renderFootnoteClose = (): string => '</li>\n';
 
-const renderFootnoteAnchor: Renderer.RenderRule = (tokens: FootNoteToken[], index, options, env: FootNoteEnv, self): string => {
+const renderFootnoteAnchor: Renderer.RenderRule = (
+  tokens: FootNoteToken[],
+  index,
+  options,
+  env: FootNoteEnv,
+  self
+): string => {
   return ` <a href="#footnote-ref${self.rules['footnoteAnchorName']!(tokens, index, options, env, self)}${
     getIDSuffix(tokens, index)
     /* ↩ with escape code to prevent display as Apple Emoji on iOS */
@@ -267,7 +298,7 @@ const footnoteTail = (state: FootNoteStateCore): boolean => {
 
   if (!state.env.footnotes) return false;
 
-  state.tokens = state.tokens.filter((stateToken) => {
+  state.tokens = state.tokens.filter(stateToken => {
     if (stateToken.type === 'footnoteReferenceOpen') {
       insideRef = true;
       current = [];
@@ -338,7 +369,7 @@ const footnoteTail = (state: FootNoteStateCore): boolean => {
   return true;
 };
 
-export const footnote: PluginSimple = (md) => {
+export const footnote: PluginSimple = md => {
   md.renderer.rules['footnoteRef'] = renderFootnoteRef;
   md.renderer.rules['footnoteBlockOpen'] = renderFootnoteBlockOpen;
   md.renderer.rules['footnoteBlockClose'] = renderFootnoteBlockClose;

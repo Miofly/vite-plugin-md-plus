@@ -7,7 +7,7 @@ import { container } from './basic/container';
 export const hint: PluginWithOptions = (md, options = {}) => {
   const containers: any[] = ['info', 'note', 'tip', 'warning', 'danger'];
 
-  containers.forEach((name) => {
+  containers.forEach(name => {
     md.use(container, {
       name,
       openRender: (tokens, index, _options, env: MarkdownEnv): string => {
@@ -31,7 +31,7 @@ export const hint: PluginWithOptions = (md, options = {}) => {
     });
   });
 
-  md.use((md) =>
+  md.use(md =>
     container(md, {
       name: 'details',
       openRender: (tokens, index, _options, env: MarkdownEnv): string => {

@@ -22,8 +22,7 @@ export const importCodePlugin: PluginWithOptions<ImportCodePluginOptions> = (md,
     const token = tokens[idx];
 
     // use imported code as token content
-    const { importFilePath, importCode } =
-      resolveImportCode(token.meta, resolve(process.cwd(), 'src'));
+    const { importFilePath, importCode } = resolveImportCode(token.meta, resolve(process.cwd(), 'src'));
     token.content = importCode;
 
     // extract imported files to env

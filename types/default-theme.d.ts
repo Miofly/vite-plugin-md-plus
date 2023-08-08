@@ -5,150 +5,148 @@ export namespace DefaultTheme {
      *
      * @example '/logo.svg'
      */
-    logo?: ThemeableImage
+    logo?: ThemeableImage;
 
     /**
      * Custom site title in navbar. If the value is undefined,
      * `config.title` will be used.
      */
-    siteTitle?: string | false
+    siteTitle?: string | false;
 
     /**
      * Custom header levels of outline in the aside component.
      *
      * @default 2
      */
-    outline?: number | [number, number] | 'deep' | false
+    outline?: number | [number, number] | 'deep' | false;
 
     /**
      * Custom outline title in the aside component.
      *
      * @default 'On this page'
      */
-    outlineTitle?: string
+    outlineTitle?: string;
 
     /**
      * The nav items.
      */
-    nav?: NavItem[]
+    nav?: NavItem[];
 
     /**
      * The sidebar items.
      */
-    sidebar?: Sidebar
+    sidebar?: Sidebar;
 
     /**
      * Info for the edit link. If it's undefined, the edit link feature will
      * be disabled.
      */
-    editLink?: EditLink
+    editLink?: EditLink;
 
     /**
      * Set custom last updated text.
      *
      * @default 'Last updated'
      */
-    lastUpdatedText?: string
+    lastUpdatedText?: string;
 
     /**
      * Set custom prev/next labels.
      */
-    docFooter?: DocFooter
+    docFooter?: DocFooter;
 
     /**
      * The social links to be displayed at the end of the nav bar. Perfect for
      * placing links to social services such as GitHub, Twitter, Facebook, etc.
      */
-    socialLinks?: SocialLink[]
+    socialLinks?: SocialLink[];
 
     /**
      * The footer configuration.
      */
-    footer?: Footer
+    footer?: Footer;
 
     /**
      * Adds locale menu to the nav. This option should be used when you have
      * your translated sites outside of the project.
      */
-    localeLinks?: LocaleLinks
+    localeLinks?: LocaleLinks;
 
     /**
      * The algolia options. Leave it undefined to disable the search feature.
      */
-    algolia?: AlgoliaSearchOptions
+    algolia?: AlgoliaSearchOptions;
 
     /**
      * The carbon ads options. Leave it undefined to disable the ads feature.
      */
-    carbonAds?: CarbonAdsOptions
+    carbonAds?: CarbonAdsOptions;
   }
 
   // nav -----------------------------------------------------------------------
 
-  export type NavItem = NavItemWithLink | NavItemWithChildren
+  export type NavItem = NavItemWithLink | NavItemWithChildren;
 
   export type NavItemWithLink = {
-    text: string
-    link: string
+    text: string;
+    link: string;
 
     /**
      * `activeMatch` is expected to be a regex string. We can't use actual
      * RegExp object here because it isn't serializable
      */
-    activeMatch?: string
-  }
+    activeMatch?: string;
+  };
 
   export type NavItemChildren = {
-    text?: string
-    items: NavItemWithLink[]
-  }
+    text?: string;
+    items: NavItemWithLink[];
+  };
 
   export interface NavItemWithChildren {
-    text?: string
-    items: (NavItemChildren | NavItemWithLink)[]
+    text?: string;
+    items: (NavItemChildren | NavItemWithLink)[];
 
     /**
      * `activeMatch` is expected to be a regex string. We can't use actual
      * RegExp object here because it isn't serializable
      */
-    activeMatch?: string
+    activeMatch?: string;
   }
 
   // image -----------------------------------------------------------------------
 
-  export type ThemeableImage = Image | { light: Image; dark: Image }
-  export type Image = string | { src: string; alt?: string }
+  export type ThemeableImage = Image | { light: Image; dark: Image };
+  export type Image = string | { src: string; alt?: string };
 
   // sidebar -------------------------------------------------------------------
 
-  export type Sidebar = SidebarGroup[] | SidebarMulti
+  export type Sidebar = SidebarGroup[] | SidebarMulti;
 
   export interface SidebarMulti {
-    [path: string]: SidebarGroup[]
+    [path: string]: SidebarGroup[];
   }
 
   export interface SidebarGroup {
-    text?: string
-    items: SidebarItem[]
+    text?: string;
+    items: SidebarItem[];
 
     /**
      * If `true`, toggle button is shown.
      *
      * @default false
      */
-    collapsible?: boolean
+    collapsible?: boolean;
 
     /**
      * If `true`, collapsible group is collapsed by default.
      *
      * @default false
      */
-    collapsed?: boolean
+    collapsed?: boolean;
   }
 
-  export type SidebarItem =
-    | { text: string; link: string }
-    | { text: string; link?: string; items: SidebarItem[] }
+  export type SidebarItem = { text: string; link: string } | { text: string; link?: string; items: SidebarItem[] };
 
   // edit link -----------------------------------------------------------------
 
@@ -158,14 +156,14 @@ export namespace DefaultTheme {
      *
      * @example 'https://github.com/vuejs/vitepress/edit/main/docs/:path'
      */
-    pattern: string
+    pattern: string;
 
     /**
      * Custom text for edit link.
      *
      * @default 'Edit this page'
      */
-    text?: string
+    text?: string;
   }
 
   // prev-next -----------------------------------------------------------------
@@ -176,21 +174,21 @@ export namespace DefaultTheme {
      *
      * @default 'Previous page'
      */
-    prev?: string
+    prev?: string;
 
     /**
      * Custom label for next page button.
      *
      * @default 'Next page'
      */
-    next?: string
+    next?: string;
   }
 
   // social link ---------------------------------------------------------------
 
   export interface SocialLink {
-    icon: SocialLinkIcon
-    link: string
+    icon: SocialLinkIcon;
+    link: string;
   }
 
   export type SocialLinkIcon =
@@ -202,38 +200,38 @@ export namespace DefaultTheme {
     | 'slack'
     | 'twitter'
     | 'youtube'
-    | { svg: string }
+    | { svg: string };
 
   // footer --------------------------------------------------------------------
 
   export interface Footer {
-    message?: string
-    copyright?: string
+    message?: string;
+    copyright?: string;
   }
 
   // team ----------------------------------------------------------------------
 
   export interface TeamMember {
-    avatar: string
-    name: string
-    title?: string
-    org?: string
-    orgLink?: string
-    desc?: string
-    links?: SocialLink[]
-    sponsor?: string
+    avatar: string;
+    name: string;
+    title?: string;
+    org?: string;
+    orgLink?: string;
+    desc?: string;
+    links?: SocialLink[];
+    sponsor?: string;
   }
 
   // locales -------------------------------------------------------------------
 
   export interface LocaleLinks {
-    text: string
-    items: LocaleLink[]
+    text: string;
+    items: LocaleLink[];
   }
 
   export interface LocaleLink {
-    text: string
-    link: string
+    text: string;
+    link: string;
   }
 
   // algolia ------------------------------------------------------------------
@@ -243,20 +241,20 @@ export namespace DefaultTheme {
    * `@docsearch/react/dist/esm/DocSearch.d.ts`
    */
   export interface AlgoliaSearchOptions {
-    appId: string
-    apiKey: string
-    indexName: string
-    placeholder?: string
-    searchParameters?: any
-    disableUserPersonalization?: boolean
-    initialQuery?: string
-    buttonText?: string
+    appId: string;
+    apiKey: string;
+    indexName: string;
+    placeholder?: string;
+    searchParameters?: any;
+    disableUserPersonalization?: boolean;
+    initialQuery?: string;
+    buttonText?: string;
   }
 
   // carbon ads ----------------------------------------------------------------
 
   export interface CarbonAdsOptions {
-    code: string
-    placement: string
+    code: string;
+    placement: string;
   }
 }

@@ -1,7 +1,10 @@
 import type { PluginWithOptions } from 'markdown-it';
 import type { MarkdownItImgMarkOptions } from './options';
 
-export const imgMark: PluginWithOptions<MarkdownItImgMarkOptions> = (md, { light = ['gh-light-mode-only', 'light'], dark = ['gh-dark-mode-only', 'dark'] } = {}): void => {
+export const imgMark: PluginWithOptions<MarkdownItImgMarkOptions> = (
+  md,
+  { light = ['gh-light-mode-only', 'light'], dark = ['gh-dark-mode-only', 'dark'] } = {}
+): void => {
   const originalImageRender = md.renderer.rules.image!;
 
   md.renderer.rules.image = (tokens, index, options, env, self): string => {
@@ -9,10 +12,10 @@ export const imgMark: PluginWithOptions<MarkdownItImgMarkOptions> = (md, { light
     const src = token.attrGet('src');
 
     if (src) {
-      if (light.some((item) => src.endsWith(`#${item}`))) {
+      if (light.some(item => src.endsWith(`#${item}`))) {
         token.attrSet('data-mode', 'lightmode-only');
         token.attrSet('src', src.replace(/#.*?$/, ''));
-      } else if (dark.some((item) => src.endsWith(`#${item}`))) {
+      } else if (dark.some(item => src.endsWith(`#${item}`))) {
         token.attrSet('data-mode', 'darkmode-only');
         token.attrSet('src', src.replace(/#.*?$/, ''));
       }

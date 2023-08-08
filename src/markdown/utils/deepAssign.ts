@@ -3,10 +3,14 @@ type IAnyObject = Record<any, any>;
 
 const isArray = Array.isArray;
 
-const isPlainObject = <T extends IAnyObject = IAnyObject>(val: unknown): val is T => Object.prototype.toString.call(val) === '[object Object]';
+const isPlainObject = <T extends IAnyObject = IAnyObject>(val: unknown): val is T =>
+  Object.prototype.toString.call(val) === '[object Object]';
 
 /** Deep merge objects to the first one */
-export const deepAssign = <T extends IAnyObject, U extends IAnyObject = T, V extends Partial<T> & Partial<U> = T & U>(originObject: T, ...overrideObjects: (U | null | undefined)[]): V => {
+export const deepAssign = <T extends IAnyObject, U extends IAnyObject = T, V extends Partial<T> & Partial<U> = T & U>(
+  originObject: T,
+  ...overrideObjects: (U | null | undefined)[]
+): V => {
   if (overrideObjects.length === 0) return originObject as unknown as V;
 
   /** Object being merged */

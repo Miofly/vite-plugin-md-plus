@@ -49,7 +49,12 @@ export interface CodePluginOptions {
  */
 export const codePlugin: PluginWithOptions<CodePluginOptions> = (
   md,
-  { highlightLines = true, lineNumbers = true, preWrapper = true, vPre: { block: vPreBlock = true, inline: vPreInline = true } = {} }: CodePluginOptions = {}
+  {
+    highlightLines = true,
+    lineNumbers = true,
+    preWrapper = true,
+    vPre: { block: vPreBlock = true, inline: vPreInline = true } = {}
+  }: CodePluginOptions = {}
 ): void => {
   // override default fence renderer
   md.renderer.rules.fence = (tokens, idx, options, env, slf) => {
@@ -101,7 +106,8 @@ export const codePlugin: PluginWithOptions<CodePluginOptions> = (
     }
 
     // resolve line-numbers mark from token info
-    const useLineNumbers = resolveLineNumbers(info) ?? (typeof lineNumbers === 'number' ? lines.length >= lineNumbers : lineNumbers);
+    const useLineNumbers =
+      resolveLineNumbers(info) ?? (typeof lineNumbers === 'number' ? lines.length >= lineNumbers : lineNumbers);
     // generate line numbers
     if (useLineNumbers) {
       // generate line numbers code

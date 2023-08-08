@@ -10,7 +10,9 @@ const scanTokens = (tokens: Token[], config: MarkdownItStylizeConfig[], skipCont
     // skip current token
     if (type !== 'text' || skipContents.includes(content)) continue;
 
-    const configItem = config.find(({ matcher }) => (typeof matcher === 'string' ? matcher === content : matcher.test(content)));
+    const configItem = config.find(({ matcher }) =>
+      typeof matcher === 'string' ? matcher === content : matcher.test(content)
+    );
     const tokenPrev = tokens[index - 1];
     const tokenNext = tokens[index + 1];
 

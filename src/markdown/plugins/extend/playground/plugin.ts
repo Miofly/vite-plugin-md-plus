@@ -6,7 +6,13 @@ import type { PlaygroundData, PlaygroundOptions } from '../../../types';
 const AT_MARKER = '@';
 const VALID_MARKERS = ['file', 'import', 'setting'];
 
-const escapeHtml = (unsafeHTML: string): string => unsafeHTML.replace(/&/gu, '&amp;').replace(/</gu, '&lt;').replace(/>/gu, '&gt;').replace(/"/gu, '&quot;').replace(/'/gu, '&#039;');
+const escapeHtml = (unsafeHTML: string): string =>
+  unsafeHTML
+    .replace(/&/gu, '&amp;')
+    .replace(/</gu, '&lt;')
+    .replace(/>/gu, '&gt;')
+    .replace(/"/gu, '&quot;')
+    .replace(/'/gu, '&#039;');
 
 const getPlaygroundRule =
   (name: string): RuleBlock =>
@@ -231,7 +237,7 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
     alt: ['paragraph', 'reference', 'blockquote', 'list']
   });
 
-  VALID_MARKERS.forEach((marker) => {
+  VALID_MARKERS.forEach(marker => {
     // WARNING:  Here we use an internal variable to make sure tab rule is not registered
 
     // @ts-ignore
@@ -279,7 +285,8 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
 
         // parse settings
         if (foundSettings) {
-          if (type === 'fence' && info === 'json') playgroundData.settings = <Record<string, unknown>>JSON.parse(content.trim());
+          if (type === 'fence' && info === 'json')
+            playgroundData.settings = <Record<string, unknown>>JSON.parse(content.trim());
         }
         // add code block content
         else if (type === 'fence' && currentKey)

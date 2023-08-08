@@ -114,10 +114,14 @@ export const handleInclude = (info: ImportFileInfo, { cwd, includedFiles, resolv
   return dedent(results.join('\n').replace(/\n?$/, '\n'));
 };
 
-export const resolveInclude = (content: string, options: Required<MarkdownItIncludeOptions>, { cwd, includedFiles }: IncludeInfo): string =>
+export const resolveInclude = (
+  content: string,
+  options: Required<MarkdownItIncludeOptions>,
+  { cwd, includedFiles }: IncludeInfo
+): string =>
   content
     .split('\n')
-    .map((line) => {
+    .map(line => {
       if (line.startsWith('@include')) {
         // check if it’s matched the syntax
         const result = line.match(INCLUDE_RE);
@@ -142,7 +146,11 @@ export const resolveInclude = (content: string, options: Required<MarkdownItIncl
 
           return options.deep && actualPath.endsWith('.md')
             ? resolveInclude(content, options, {
-                cwd: path.isAbsolute(actualPath) ? path.dirname(actualPath) : cwd ? path.resolve(cwd, path.dirname(actualPath)) : null,
+                cwd: path.isAbsolute(actualPath)
+                  ? path.dirname(actualPath)
+                  : cwd
+                  ? path.resolve(cwd, path.dirname(actualPath))
+                  : null,
                 includedFiles
               })
             : content;
@@ -238,7 +246,13 @@ const resolveRelatedLink = (attr: string, token: Token, filePath: string, includ
 };
 
 export const include: PluginWithOptions<MarkdownItIncludeOptions> = (md, options): void => {
-  const { currentPath, resolvePath = (path: string): string => path, deep = false, resolveLinkPath = true, resolveImagePath = true } = options || {};
+  const {
+    currentPath,
+    resolvePath = (path: string): string => path,
+    deep = false,
+    resolveLinkPath = true,
+    resolveImagePath = true
+  } = options || {};
 
   if (typeof currentPath !== 'function') return console.error('[@mdit/plugin-include]: "currentPath" is required');
 
@@ -296,7 +310,9 @@ export const include: PluginWithOptions<MarkdownItIncludeOptions> = (md, options
     }
 
     if (resolveLinkPath) {
-      const defaultLinkRenderer = md.renderer.rules['link_open'] || ((tokens, index, options, _env, self): string => self.renderToken(tokens, index, options));
+      const defaultLinkRenderer =
+        md.renderer.rules['link_open'] ||
+        ((tokens, index, options, _env, self): string => self.renderToken(tokens, index, options));
 
       md.renderer.rules['link_open'] = (tokens, index, options, env: IncludeEnv, self): string => {
         const token = tokens[index];

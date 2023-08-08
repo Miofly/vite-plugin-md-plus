@@ -1,6 +1,15 @@
 import { HeadConfig, LocaleConfig, PageData, SiteData } from '../types/shared';
 
-export type { SiteData, PageData, HeadConfig, LocaleConfig, Header, DefaultTheme, PageDataPayload, CleanUrlsMode } from '../types/shared';
+export type {
+  SiteData,
+  PageData,
+  HeadConfig,
+  LocaleConfig,
+  Header,
+  DefaultTheme,
+  PageDataPayload,
+  CleanUrlsMode
+} from '../types/shared';
 
 export const EXTERNAL_URL_RE = /^[a-z]+:/i;
 export const APPEARANCE_KEY = 'vitepress-theme-appearance';
@@ -37,7 +46,10 @@ function resolveLocales<T>(locales: Record<string, T>, route: string): T | undef
   return localeRoot ? locales[localeRoot] : undefined;
 }
 
-export function createLangDictionary(siteData: { themeConfig?: Record<string, any>; locales?: Record<string, LocaleConfig> }) {
+export function createLangDictionary(siteData: {
+  themeConfig?: Record<string, any>;
+  locales?: Record<string, LocaleConfig>;
+}) {
   const { locales } = siteData.themeConfig || {};
   const siteLocales = siteData.locales;
   return locales && siteLocales
@@ -127,5 +139,5 @@ function hasTag(head: HeadConfig[], tag: HeadConfig) {
 }
 
 export function mergeHead(prev: HeadConfig[], curr: HeadConfig[]) {
-  return [...prev.filter((tagAttrs) => !hasTag(curr, tagAttrs)), ...curr];
+  return [...prev.filter(tagAttrs => !hasTag(curr, tagAttrs)), ...curr];
 }

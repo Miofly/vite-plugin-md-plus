@@ -155,7 +155,10 @@ const blockTex: RuleBlock = (state, start, end, silent) => {
   const token = state.push('math_block', 'math', 0);
 
   token.block = true;
-  token.content = (firstLine?.trim() ? `\n${firstLine}\n` : '\n') + state.getLines(start + 1, next, state.tShift[start], true) + (lastLine?.trim() ? lastLine : '');
+  token.content =
+    (firstLine?.trim() ? `\n${firstLine}\n` : '\n') +
+    state.getLines(start + 1, next, state.tShift[start], true) +
+    (lastLine?.trim() ? lastLine : '');
   token.map = [start, state.line];
   token.markup = '$$';
 

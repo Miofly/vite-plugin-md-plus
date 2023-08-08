@@ -63,6 +63,6 @@ const superscriptRender: RuleInline = (state, silent) => {
   return true;
 };
 
-export const sup: PluginSimple = (md) => {
+export const sup: PluginSimple = md => {
   md.inline.ruler.after('emphasis', 'sup', superscriptRender);
 };

@@ -22,7 +22,7 @@ const getCaption = (image: Token): string => {
 };
 
 export const figure: PluginWithOptions<MarkdownItFigureOptions> = (md, options = {}) => {
-  md.core.ruler.before('linkify', 'figure', (state) => {
+  md.core.ruler.before('linkify', 'figure', state => {
     // do not process first and last token
     for (let index = 1, { length } = state.tokens; index < length - 1; index++) {
       const token = state.tokens[index];
@@ -38,7 +38,8 @@ export const figure: PluginWithOptions<MarkdownItFigureOptions> = (md, options =
       // three children, should be image enclosed in link
       if (token.children.length === 3) {
         const [childrenA, childrenB, childrenC] = token.children;
-        const isEnclosed = childrenA.type !== 'link_open' || childrenB.type !== 'image' || childrenC.type !== 'link_close';
+        const isEnclosed =
+          childrenA.type !== 'link_open' || childrenB.type !== 'image' || childrenC.type !== 'link_close';
 
         if (isEnclosed) continue;
       }

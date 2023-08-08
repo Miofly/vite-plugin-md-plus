@@ -17,7 +17,7 @@ let languagesMap: LanguagesMap;
 const getLanguagesMap = (): LanguagesMap => {
   if (!languagesMap) {
     languagesMap = Object.values(languages).reduce((result, item) => {
-      item.aliases.forEach((alias) => {
+      item.aliases.forEach(alias => {
         result[alias] = item;
       });
       return result;

@@ -1,5 +1,5 @@
 export interface ImportCodeTokenMeta {
-  importPath: string
-  lineStart: number
-  lineEnd?: number
+  importPath: string;
+  lineStart: number;
+  lineEnd?: number;
 }

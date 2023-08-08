@@ -10,7 +10,10 @@ export const createRenderHeaders = ({
   itemClass,
   linkTag,
   linkClass
-}: Pick<Required<TocPluginOptions>, 'listTag' | 'listClass' | 'itemClass' | 'linkTag' | 'linkClass'>): RenderHeadersFn => {
+}: Pick<
+  Required<TocPluginOptions>,
+  'listTag' | 'listClass' | 'itemClass' | 'linkTag' | 'linkClass'
+>): RenderHeadersFn => {
   const listTagString = htmlEscape(listTag);
   const listClassString = listClass ? ` class="${htmlEscape(listClass)}"` : '';
   const itemTagString = 'li';
@@ -25,9 +28,11 @@ export const createRenderHeaders = ({
 <${listTagString}${listClassString}>\
 ${headers
   .map(
-    (header) => `\
+    header => `\
 <${itemTagString} class="${itemClassString}">\
-<${linkTagString} class="${childClassString ? linkClassString + ' ' + childClassString : linkClassString}"  ${linkTo(header.link)}>\
+<${linkTagString} class="${childClassString ? linkClassString + ' ' + childClassString : linkClassString}"  ${linkTo(
+      header.link
+    )}>\
 ${header.title}\
 </${linkTagString}>\
 ${header.children.length > 0 ? renderHeaders(header.children, true, level + 1) : ''}\

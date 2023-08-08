@@ -1,6 +1,6 @@
 import type { PluginSimple } from 'markdown-it';
 
-export const imgLazyload: PluginSimple = (md) => {
+export const imgLazyload: PluginSimple = md => {
   const originalImageRender = md.renderer.rules.image!;
 
   md.renderer.rules.image = (tokens, index, options, env, self): string => {

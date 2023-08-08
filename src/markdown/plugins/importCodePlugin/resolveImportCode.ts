@@ -21,9 +21,9 @@ export const resolveImportCode = (
       };
     }
   }
-  
+
   importFilePath = path.resolve(filePath, importPath);
-  
+
   // check file existence
   if (!fs.existsSync(importFilePath)) {
     return {

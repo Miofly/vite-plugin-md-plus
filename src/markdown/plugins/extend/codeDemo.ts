@@ -17,7 +17,7 @@ export const CODE_DEMO_DEFAULT_SETTING = {
 
 const getPlugin =
   (name: string): PluginSimple =>
-  (md) =>
+  md =>
     container(md, {
       name,
       openRender: (tokens: Token[], index: number): string => {
@@ -38,7 +38,9 @@ const getPlugin =
         }
 
         return `
-<VftMdCodeDemo id="code-demo-${index}" type="${name.split('-')[0]}"${title ? ` title="${encodeURIComponent(title)}"` : ''}${config ? ` config="${config}"` : ''} code="${utoa(JSON.stringify(code))}">
+<VftMdCodeDemo id="code-demo-${index}" type="${name.split('-')[0]}"${
+          title ? ` title="${encodeURIComponent(title)}"` : ''
+        }${config ? ` config="${config}"` : ''} code="${utoa(JSON.stringify(code))}">
 `;
       },
       closeRender: () => '</VftMdCodeDemo>'

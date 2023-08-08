@@ -31,7 +31,11 @@ const parseNumber = (str: string, pos: number, max: number): { ok: boolean; pos:
   return result;
 };
 
-const parseImageSize = (str: string, pos: number, max: number): { ok: boolean; pos: number; width: string; height: string } => {
+const parseImageSize = (
+  str: string,
+  pos: number,
+  max: number
+): { ok: boolean; pos: number; width: string; height: string } => {
   const result = {
     ok: false,
     pos: 0,
@@ -255,6 +259,6 @@ const imgSizeRule: RuleInline = (state, silent) => {
   return true;
 };
 
-export const imgSize: PluginSimple = (md) => {
+export const imgSize: PluginSimple = md => {
   md.inline.ruler.before('emphasis', 'image', imgSizeRule);
 };

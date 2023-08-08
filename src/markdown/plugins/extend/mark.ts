@@ -78,7 +78,8 @@ const postProcess = (state: StateInline, delimiters: StateInline.Delimiter[]): v
       token.markup = '==';
       token.content = '';
 
-      if (state.tokens[endDelim.token - 1].type === 'text' && state.tokens[endDelim.token - 1].content === '=') loneMarkers.push(endDelim.token - 1);
+      if (state.tokens[endDelim.token - 1].type === 'text' && state.tokens[endDelim.token - 1].content === '=')
+        loneMarkers.push(endDelim.token - 1);
     }
   }
 
@@ -106,9 +107,9 @@ const postProcess = (state: StateInline, delimiters: StateInline.Delimiter[]): v
   }
 };
 
-export const mark: PluginSimple = (md) => {
+export const mark: PluginSimple = md => {
   md.inline.ruler.before('emphasis', 'mark', tokenize);
-  md.inline.ruler2.before('emphasis', 'mark', (state) => {
+  md.inline.ruler2.before('emphasis', 'mark', state => {
     const tokensMeta = state.tokens_meta || [];
 
     postProcess(state, state.delimiters);

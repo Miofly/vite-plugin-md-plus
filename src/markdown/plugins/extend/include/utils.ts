@@ -13,7 +13,7 @@ export const dedent = (text: string): string => {
   }, Infinity);
 
   if (minIndentLength < Infinity) {
-    return lines.map((x) => x.slice(minIndentLength)).join('\n');
+    return lines.map(x => x.slice(minIndentLength)).join('\n');
   }
 
   return text;

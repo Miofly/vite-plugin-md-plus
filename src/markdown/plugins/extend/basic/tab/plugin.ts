@@ -23,7 +23,8 @@ const getTabRule =
     let index;
 
     // Check out the rest of the marker string
-    for (index = 0; index < TAB_MARKER.length; index++) if (TAB_MARKER[index] !== state.src[start + index]) return false;
+    for (index = 0; index < TAB_MARKER.length; index++)
+      if (TAB_MARKER[index] !== state.src[start + index]) return false;
 
     const markup = state.src.slice(start, start + index);
     const info = state.src.slice(start + index, max);
@@ -312,7 +313,14 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
   const {
     name = 'tabs',
 
-    tabsOpenRenderer = (info: MarkdownItTabInfo, tokens: Token[], index: number, _options: Options, _env: unknown, self: Renderer): string => {
+    tabsOpenRenderer = (
+      info: MarkdownItTabInfo,
+      tokens: Token[],
+      index: number,
+      _options: Options,
+      _env: unknown,
+      self: Renderer
+    ): string => {
       const { active, data } = info;
       const token = tokens[index];
 
@@ -322,9 +330,9 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
 
       const tabs = data.map(
         ({ title, id }, index) =>
-          `<button type="button" class="${name}-tab-button${active === index ? ' active' : ''}" data-tab="${index}"${id ? ` data-id="${escapeHtml(id)}"` : ''}${
-            active === index ? ' data-active' : ''
-          }>${escapeHtml(title)}</button>`
+          `<button type="button" class="${name}-tab-button${active === index ? ' active' : ''}" data-tab="${index}"${
+            id ? ` data-id="${escapeHtml(id)}"` : ''
+          }${active === index ? ' data-active' : ''}>${escapeHtml(title)}</button>`
       );
 
       return `\
@@ -339,7 +347,14 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
   </div>
 </div>`,
 
-    tabOpenRenderer = (info: MarkdownItTabData, tokens: Token[], index: number, _options: Options, _env: unknown, self: Renderer): string => {
+    tabOpenRenderer = (
+      info: MarkdownItTabData,
+      tokens: Token[],
+      index: number,
+      _options: Options,
+      _env: unknown,
+      self: Renderer
+    ): string => {
       const token = tokens[index];
 
       token.attrJoin('class', `${name}-tab-content${info.isActive ? ' active' : ''}`);

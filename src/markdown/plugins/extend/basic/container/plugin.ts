@@ -20,7 +20,8 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
 
       return slf.renderToken(tokens, index, options);
     },
-    closeRender = (tokens: Token[], index: number, options: Options, _env: unknown, slf: Renderer): string => slf.renderToken(tokens, index, options)
+    closeRender = (tokens: Token[], index: number, options: Options, _env: unknown, slf: Renderer): string =>
+      slf.renderToken(tokens, index, options)
   } = { name: '' }
 ) => {
   const MIN_MARKER_NUM = 3;

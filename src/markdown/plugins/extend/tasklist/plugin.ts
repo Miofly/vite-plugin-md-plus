@@ -18,9 +18,16 @@ interface TaskListStateCore extends StateCore {
 const startsWithTodoMarkdown = (token: Token): boolean => /^\[[xX \u00A0]\][ \u00A0]/.test(token.content);
 
 const isTaskListItem = (tokens: Token[], index: number): boolean =>
-  isInlineToken(tokens[index]) && isParagraphToken(tokens[index - 1]) && isListItemToken(tokens[index - 2]) && startsWithTodoMarkdown(tokens[index]);
+  isInlineToken(tokens[index]) &&
+  isParagraphToken(tokens[index - 1]) &&
+  isListItemToken(tokens[index - 2]) &&
+  startsWithTodoMarkdown(tokens[index]);
 
-const generateCheckbox = (token: Token, id: string, { checkboxClass, disabled }: Required<Pick<MarkdownItTaskListOptions, 'checkboxClass' | 'disabled'>>): Token => {
+const generateCheckbox = (
+  token: Token,
+  id: string,
+  { checkboxClass, disabled }: Required<Pick<MarkdownItTaskListOptions, 'checkboxClass' | 'disabled'>>
+): Token => {
   const checkbox = new Token('checkbox_input', 'input', 0);
 
   checkbox.attrs = [
@@ -50,7 +57,16 @@ const beginLabel = (id: string, labelClass: string): Token => {
 
 const endLabel = (): Token => new Token('label_close', 'label', -1);
 
-const addCheckBox = (token: Token, state: TaskListStateCore, { disabled, checkboxClass, label, labelClass }: Required<Omit<MarkdownItTaskListOptions, 'containerClass' | 'itemClass'>>): void => {
+const addCheckBox = (
+  token: Token,
+  state: TaskListStateCore,
+  {
+    disabled,
+    checkboxClass,
+    label,
+    labelClass
+  }: Required<Omit<MarkdownItTaskListOptions, 'containerClass' | 'itemClass'>>
+): void => {
   const id = `task-item-${state.env.tasklists++}`;
 
   token.children = token.children || [];
@@ -69,7 +85,14 @@ const addCheckBox = (token: Token, state: TaskListStateCore, { disabled, checkbo
 
 export const tasklist: PluginWithOptions<MarkdownItTaskListOptions> = (
   md,
-  { disabled = true, label = true, containerClass = 'task-list-container', itemClass = 'task-list-item', checkboxClass = 'task-list-item-checkbox', labelClass = 'task-list-item-label' } = {}
+  {
+    disabled = true,
+    label = true,
+    containerClass = 'task-list-container',
+    itemClass = 'task-list-item',
+    checkboxClass = 'task-list-item-checkbox',
+    labelClass = 'task-list-item-label'
+  } = {}
 ) => {
   md.core.ruler.after('inline', 'github-task-lists', (state: TaskListStateCore) => {
     const tokens = state.tokens;
