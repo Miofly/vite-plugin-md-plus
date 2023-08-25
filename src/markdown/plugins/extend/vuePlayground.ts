@@ -9,9 +9,17 @@ export const DEFAULT_VUE_PLAYGROUND_OPTIONS: VuePlaygroundOptions = {
   showImportMap: true,
   clearConsole: false,
   layout: 'vertical',
-  ssr: false
+  ssr: false,
 };
-const VUE_SUPPORTED_EXTENSIONS = ['html', 'js', 'ts', 'vue', 'jsx', 'tsx', 'json'];
+const VUE_SUPPORTED_EXTENSIONS = [
+  'html',
+  'js',
+  'ts',
+  'vue',
+  'jsx',
+  'tsx',
+  'json',
+];
 
 const encodeFiles = (files: PlaygroundData['files']): string =>
   Buffer.from(
@@ -19,9 +27,9 @@ const encodeFiles = (files: PlaygroundData['files']): string =>
       Object.fromEntries(
         Object.entries(files)
           .filter(([, { ext }]) => VUE_SUPPORTED_EXTENSIONS.includes(ext))
-          .map(([key, config]) => [key, config.content])
-      )
-    )
+          .map(([key, config]) => [key, config.content]),
+      ),
+    ),
   ).toString('base64');
 
 export const vuePlayground: PluginSimple = md => {
@@ -32,7 +40,7 @@ export const vuePlayground: PluginSimple = md => {
       title,
       key,
       settings: encodeURIComponent(JSON.stringify(settings || {})),
-      files: encodeURIComponent(encodeFiles(files))
-    })
+      files: encodeURIComponent(encodeFiles(files)),
+    }),
   });
 };

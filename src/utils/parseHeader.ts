@@ -13,7 +13,10 @@
 import emojiData from 'markdown-it-emoji/lib/data/full.json';
 
 const parseEmojis = str => {
-  return String(str).replace(/:(.+?):/g, (placeholder, key) => emojiData[key] || placeholder);
+  return String(str).replace(
+    /:(.+?):/g,
+    (placeholder, key) => emojiData[key] || placeholder,
+  );
 };
 
 const unescapeHtml = html =>
@@ -49,7 +52,12 @@ const compose = (...processors) => {
 };
 
 // Unescape html, parse emojis and remove some md tokens.
-export const parseHeader = compose(unescapeHtml, parseEmojis, removeMarkdownTokens, trim);
+export const parseHeader = compose(
+  unescapeHtml,
+  parseEmojis,
+  removeMarkdownTokens,
+  trim,
+);
 
 // Also clean the html that isn't wrapped by code.
 // Because we want to support using VUE components in headers.

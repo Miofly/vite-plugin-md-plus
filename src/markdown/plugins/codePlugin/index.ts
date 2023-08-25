@@ -1,5 +1,8 @@
 import type { PluginWithOptions } from 'markdown-it';
-import { isHighlightLine, resolveHighlightLines } from './resolveHighlightLines';
+import {
+  isHighlightLine,
+  resolveHighlightLines,
+} from './resolveHighlightLines';
 import { resolveLanguage } from './resolveLanguage';
 import { resolveLineNumbers } from './resolveLineNumbers';
 import { resolveVPre } from './resolveVPre';
@@ -53,8 +56,8 @@ export const codePlugin: PluginWithOptions<CodePluginOptions> = (
     highlightLines = true,
     lineNumbers = true,
     preWrapper = true,
-    vPre: { block: vPreBlock = true, inline: vPreInline = true } = {}
-  }: CodePluginOptions = {}
+    vPre: { block: vPreBlock = true, inline: vPreInline = true } = {},
+  }: CodePluginOptions = {},
 ): void => {
   // override default fence renderer
   md.renderer.rules.fence = (tokens, idx, options, env, slf) => {
@@ -67,12 +70,16 @@ export const codePlugin: PluginWithOptions<CodePluginOptions> = (
 
     const languageClass = `${options.langPrefix}${language.name}`;
     // try to get highlighted code
-    const code = options.highlight?.(token.content, language.name, '') || md.utils.escapeHtml(token.content);
+    const code =
+      options.highlight?.(token.content, language.name, '') ||
+      md.utils.escapeHtml(token.content);
 
     token.attrJoin('class', languageClass);
 
     // wrap highlighted code with `<pre>` and `<code>`
-    let result = code.startsWith('<pre') ? code : `<pre${slf.renderAttrs(token)}><code>${code}</code></pre>`;
+    let result = code.startsWith('<pre')
+      ? code
+      : `<pre${slf.renderAttrs(token)}><code>${code}</code></pre>`;
 
     // resolve v-pre mark from token info
     const useVPre = resolveVPre(info) ?? vPreBlock;
@@ -89,7 +96,9 @@ export const codePlugin: PluginWithOptions<CodePluginOptions> = (
     const lines = code.split('\n').slice(0, -1);
 
     // resolve highlight line ranges from token info
-    const highlightLinesRanges = highlightLines ? resolveHighlightLines(info) : null;
+    const highlightLinesRanges = highlightLines
+      ? resolveHighlightLines(info)
+      : null;
 
     // generate highlight lines
     if (highlightLinesRanges) {
@@ -107,16 +116,23 @@ export const codePlugin: PluginWithOptions<CodePluginOptions> = (
 
     // resolve line-numbers mark from token info
     const useLineNumbers =
-      resolveLineNumbers(info) ?? (typeof lineNumbers === 'number' ? lines.length >= lineNumbers : lineNumbers);
+      resolveLineNumbers(info) ??
+      (typeof lineNumbers === 'number'
+        ? lines.length >= lineNumbers
+        : lineNumbers);
     // generate line numbers
     if (useLineNumbers) {
       // generate line numbers code
-      const lineNumbersCode = lines.map(() => '<div class="line-number"></div>').join('');
+      const lineNumbersCode = lines
+        .map(() => '<div class="line-number"></div>')
+        .join('');
 
       result = `${result}<div class="line-numbers" aria-hidden="true">${lineNumbersCode}</div>`;
     }
 
-    result = `<div class="${languageClass}${useLineNumbers ? ' line-numbers-mode' : ''}" data-ext="${language.ext}">
+    result = `<div class="${languageClass}${
+      useLineNumbers ? ' line-numbers-mode' : ''
+    }" data-ext="${language.ext}">
  <button class="copy"></button>
 ${result}</div>`;
 

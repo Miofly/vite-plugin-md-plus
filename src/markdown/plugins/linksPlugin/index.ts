@@ -32,7 +32,10 @@ export interface LinksPluginOptions {
  * - internal links: convert them into `<RouterLink>`
  * - external links: add extra attrs and external icon
  */
-export const linksPlugin: PluginWithOptions<LinksPluginOptions> = (md, options: LinksPluginOptions = {}): void => {
+export const linksPlugin: PluginWithOptions<LinksPluginOptions> = (
+  md,
+  options: LinksPluginOptions = {},
+): void => {
   // tag of internal links
   const internalTag = options.internalTag || 'RouterLink';
 
@@ -40,12 +43,16 @@ export const linksPlugin: PluginWithOptions<LinksPluginOptions> = (md, options: 
   const externalAttrs = {
     target: '_blank',
     rel: 'noopener noreferrer',
-    ...options.externalAttrs
+    ...options.externalAttrs,
   };
 
   let hasOpenInternalLink = false;
 
-  const handleLinkOpen = (tokens: Token[], idx: number, env: MarkdownEnv): void => {
+  const handleLinkOpen = (
+    tokens: Token[],
+    idx: number,
+    env: MarkdownEnv,
+  ): void => {
     // get current token
     const token = tokens[idx];
 
@@ -68,12 +75,16 @@ export const linksPlugin: PluginWithOptions<LinksPluginOptions> = (md, options: 
     // check if a link is an external link
     if (isLinkExternal(hrefLink, base)) {
       // set `externalAttrs` to current token
-      Object.entries(externalAttrs).forEach(([key, val]) => token.attrSet(key, val));
+      Object.entries(externalAttrs).forEach(([key, val]) =>
+        token.attrSet(key, val),
+      );
       return;
     }
 
     // check if a link is an internal link
-    const internalLinkMatch = hrefLink.match(/^((?:.*)(?:\/|\.md|\.html))(#.*)?$/);
+    const internalLinkMatch = hrefLink.match(
+      /^((?:.*)(?:\/|\.md|\.html))(#.*)?$/,
+    );
 
     if (!internalLinkMatch) {
       return;
@@ -89,7 +100,11 @@ export const linksPlugin: PluginWithOptions<LinksPluginOptions> = (md, options: 
     const rawHash = internalLinkMatch[2] || '';
 
     // resolve relative and absolute path
-    const { relativePath, absolutePath } = resolvePaths(rawPath, base, filePathRelative);
+    const { relativePath, absolutePath } = resolvePaths(
+      rawPath,
+      base,
+      filePathRelative,
+    );
 
     // normalize markdown file path to route path
     //
@@ -119,7 +134,7 @@ export const linksPlugin: PluginWithOptions<LinksPluginOptions> = (md, options: 
     links.push({
       raw: hrefLink,
       relative: relativePath,
-      absolute: absolutePath
+      absolute: absolutePath,
     });
   };
 

@@ -42,7 +42,10 @@ export interface Header {
   children: Header[];
 }
 
-export type CleanUrlsMode = 'disabled' | 'without-subfolders' | 'with-subfolders';
+export type CleanUrlsMode =
+  | 'disabled'
+  | 'without-subfolders'
+  | 'with-subfolders';
 
 export interface SiteData<ThemeConfig = any> {
   base: string;
@@ -86,7 +89,9 @@ export interface SiteData<ThemeConfig = any> {
   >;
 }
 
-export type HeadConfig = [string, Record<string, string>] | [string, Record<string, string>, string];
+export type HeadConfig =
+  | [string, Record<string, string>]
+  | [string, Record<string, string>, string];
 
 export interface LocaleConfig {
   lang: string;

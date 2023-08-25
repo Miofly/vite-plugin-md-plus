@@ -13,16 +13,28 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
   {
     name,
     marker = ':',
-    validate = (params: string): boolean => params.trim().split(' ', 2)[0] === name,
-    openRender = (tokens: Token[], index: number, options: Options, _env: unknown, slf: Renderer): string => {
+    validate = (params: string): boolean =>
+      params.trim().split(' ', 2)[0] === name,
+    openRender = (
+      tokens: Token[],
+      index: number,
+      options: Options,
+      _env: unknown,
+      slf: Renderer,
+    ): string => {
       // add a class to the opening tag
       tokens[index].attrJoin('class', name);
 
       return slf.renderToken(tokens, index, options);
     },
-    closeRender = (tokens: Token[], index: number, options: Options, _env: unknown, slf: Renderer): string =>
-      slf.renderToken(tokens, index, options)
-  } = { name: '' }
+    closeRender = (
+      tokens: Token[],
+      index: number,
+      options: Options,
+      _env: unknown,
+      slf: Renderer,
+    ): string => slf.renderToken(tokens, index, options),
+  } = { name: '' },
 ) => {
   const MIN_MARKER_NUM = 3;
   const markerStart = marker[0];
@@ -85,7 +97,8 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
         state.sCount[nextLine] - state.blkIndent < 4
       ) {
         // check rest of marker
-        for (pos = start + 1; pos <= max; pos++) if (marker[(pos - start) % markerLength] !== state.src[pos]) break;
+        for (pos = start + 1; pos <= max; pos++)
+          if (marker[(pos - start) % markerLength] !== state.src[pos]) break;
 
         // closing code fence must be at least as long as the opening one
         if (Math.floor((pos - start) / markerLength) >= markerCount) {
@@ -133,7 +146,7 @@ export const container: PluginWithOptions<MarkdownItContainerOptions> = (
   };
 
   md.block.ruler.before('fence', `container_${name}`, container, {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
   md.renderer.rules[`container_${name}_open`] = openRender;
   md.renderer.rules[`container_${name}_close`] = closeRender;

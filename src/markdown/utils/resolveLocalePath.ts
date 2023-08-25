@@ -5,7 +5,10 @@ import { LocaleConfig } from '../../../types';
 /**
  * Resolve the matched locale path of route path
  */
-export const resolveLocalePath = (locales: LocaleConfig, routePath: string): string => {
+export const resolveLocalePath = (
+  locales: LocaleConfig,
+  routePath: string,
+): string => {
   const localePaths = Object.keys(locales).sort((a, b) => {
     const levelDelta = b.split('/').length - a.split('/').length;
     if (levelDelta !== 0) {

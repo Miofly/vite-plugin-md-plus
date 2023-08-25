@@ -7,7 +7,13 @@ import type StateCore from 'markdown-it/lib/rules_core/state_core';
 import Token from 'markdown-it/lib/token';
 import type { MarkdownItTaskListOptions } from './options';
 import type { TaskListEnv } from './types';
-import { getParentTokenIndex, isInlineToken, isListItemToken, isParagraphToken, setTokenAttr } from './utils';
+import {
+  getParentTokenIndex,
+  isInlineToken,
+  isListItemToken,
+  isParagraphToken,
+  setTokenAttr,
+} from './utils';
 
 interface TaskListStateCore extends StateCore {
   env: TaskListEnv;
@@ -15,7 +21,8 @@ interface TaskListStateCore extends StateCore {
 // The leading whitespace in a list item (token.content) is already trimmed off by markdown-it.
 // The regex below checks for '[ ] ' or '[x] ' or '[X] ' at the start of the string token.content,
 // where the space is either a normal space or a non-breaking space (character 160 = \u00A0).
-const startsWithTodoMarkdown = (token: Token): boolean => /^\[[xX \u00A0]\][ \u00A0]/.test(token.content);
+const startsWithTodoMarkdown = (token: Token): boolean =>
+  /^\[[xX \u00A0]\][ \u00A0]/.test(token.content);
 
 const isTaskListItem = (tokens: Token[], index: number): boolean =>
   isInlineToken(tokens[index]) &&
@@ -26,18 +33,22 @@ const isTaskListItem = (tokens: Token[], index: number): boolean =>
 const generateCheckbox = (
   token: Token,
   id: string,
-  { checkboxClass, disabled }: Required<Pick<MarkdownItTaskListOptions, 'checkboxClass' | 'disabled'>>
+  {
+    checkboxClass,
+    disabled,
+  }: Required<Pick<MarkdownItTaskListOptions, 'checkboxClass' | 'disabled'>>,
 ): Token => {
   const checkbox = new Token('checkbox_input', 'input', 0);
 
   checkbox.attrs = [
     ['type', 'checkbox'],
     ['class', checkboxClass],
-    ['id', id]
+    ['id', id],
   ];
 
   // if token.content starts with '[x] ' or '[X] '
-  if (/^\[[xX]\][ \u00A0]/.test(token.content)) checkbox.attrs.push(['checked', 'checked']);
+  if (/^\[[xX]\][ \u00A0]/.test(token.content))
+    checkbox.attrs.push(['checked', 'checked']);
 
   if (disabled) checkbox.attrs.push(['disabled', 'disabled']);
 
@@ -49,7 +60,7 @@ const beginLabel = (id: string, labelClass: string): Token => {
 
   label.attrs = [
     ['class', labelClass],
-    ['for', id]
+    ['for', id],
   ];
 
   return label;
@@ -64,8 +75,8 @@ const addCheckBox = (
     disabled,
     checkboxClass,
     label,
-    labelClass
-  }: Required<Omit<MarkdownItTaskListOptions, 'containerClass' | 'itemClass'>>
+    labelClass,
+  }: Required<Omit<MarkdownItTaskListOptions, 'containerClass' | 'itemClass'>>,
 ): void => {
   const id = `task-item-${state.env.tasklists++}`;
 
@@ -80,7 +91,9 @@ const addCheckBox = (
     token.children.push(endLabel());
   }
   // checkbox
-  token.children.unshift(generateCheckbox(token, id, { checkboxClass, disabled }));
+  token.children.unshift(
+    generateCheckbox(token, id, { checkboxClass, disabled }),
+  );
 };
 
 export const tasklist: PluginWithOptions<MarkdownItTaskListOptions> = (
@@ -91,27 +104,35 @@ export const tasklist: PluginWithOptions<MarkdownItTaskListOptions> = (
     containerClass = 'task-list-container',
     itemClass = 'task-list-item',
     checkboxClass = 'task-list-item-checkbox',
-    labelClass = 'task-list-item-label'
-  } = {}
+    labelClass = 'task-list-item-label',
+  } = {},
 ) => {
-  md.core.ruler.after('inline', 'github-task-lists', (state: TaskListStateCore) => {
-    const tokens = state.tokens;
+  md.core.ruler.after(
+    'inline',
+    'github-task-lists',
+    (state: TaskListStateCore) => {
+      const tokens = state.tokens;
 
-    if (!state.env.tasklists) state.env.tasklists = 0;
+      if (!state.env.tasklists) state.env.tasklists = 0;
 
-    for (let i = 2; i < tokens.length; i++) {
-      if (isTaskListItem(tokens, i)) {
-        addCheckBox(tokens[i], state, {
-          disabled,
-          label,
-          checkboxClass,
-          labelClass
-        });
-        setTokenAttr(tokens[i - 2], 'class', itemClass);
-        setTokenAttr(tokens[getParentTokenIndex(tokens, i - 2)], 'class', containerClass);
+      for (let i = 2; i < tokens.length; i++) {
+        if (isTaskListItem(tokens, i)) {
+          addCheckBox(tokens[i], state, {
+            disabled,
+            label,
+            checkboxClass,
+            labelClass,
+          });
+          setTokenAttr(tokens[i - 2], 'class', itemClass);
+          setTokenAttr(
+            tokens[getParentTokenIndex(tokens, i - 2)],
+            'class',
+            containerClass,
+          );
+        }
       }
-    }
 
-    return true;
-  });
+      return true;
+    },
+  );
 };

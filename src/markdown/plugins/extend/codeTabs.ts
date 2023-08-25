@@ -10,7 +10,7 @@ export const codeTabs: PluginSimple = md => {
       const { meta } = tokens[index];
       const tabData = data.map(({ title, id }) => ({
         title,
-        ...(id ? { id } : {})
+        ...(id ? { id } : {}),
       }));
 
       return `<VftMdCodeTabs id="${index}" :data='${
@@ -56,6 +56,6 @@ export const codeTabs: PluginSimple = md => {
 
     tabCloseRenderer: () => `\
 </template>
-`
+`,
   });
 };

@@ -4,7 +4,7 @@ import type { ImportCodeTokenMeta } from './types';
 
 export const resolveImportCode = (
   { importPath, lineStart, lineEnd }: ImportCodeTokenMeta,
-  filePath: string
+  filePath: string,
 ): {
   importFilePath: string | null;
   importCode: string;
@@ -17,7 +17,7 @@ export const resolveImportCode = (
     if (!filePath) {
       return {
         importFilePath: null,
-        importCode: 'Error when resolving path'
+        importCode: 'Error when resolving path',
       };
     }
   }
@@ -28,7 +28,7 @@ export const resolveImportCode = (
   if (!fs.existsSync(importFilePath)) {
     return {
       importFilePath,
-      importCode: 'File not found'
+      importCode: 'File not found',
     };
   }
 
@@ -42,6 +42,6 @@ export const resolveImportCode = (
       .split('\n')
       .slice(lineStart ? lineStart - 1 : lineStart, lineEnd)
       .join('\n')
-      .replace(/\n?$/, '\n')
+      .replace(/\n?$/, '\n'),
   };
 };

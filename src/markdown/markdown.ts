@@ -12,7 +12,7 @@ import type {
   ImportCodePluginOptions,
   LinksPluginOptions,
   SfcPluginOptions,
-  TocPluginOptions
+  TocPluginOptions,
 } from './plugins';
 import {
   align,
@@ -44,7 +44,7 @@ import {
   titlePlugin,
   tocPlugin,
   vueDemo,
-  vuePlayground
+  vuePlayground,
 } from './plugins';
 import type { Markdown, MarkdownOptions } from './types';
 
@@ -59,7 +59,7 @@ export const createMarkdownRenderer = ({
   title,
   importCode,
   links = {
-    internalTag: 'RouterLink'
+    internalTag: 'RouterLink',
   },
   sfc,
   container,
@@ -82,7 +82,7 @@ export const createMarkdownRenderer = ({
     typographer: false,
     // 高亮函数，会返回转义的HTML
     highlight,
-    ...markdownItOptions
+    ...markdownItOptions,
   });
 
   if (anchor !== false) {
@@ -93,9 +93,9 @@ export const createMarkdownRenderer = ({
         class: 'header-anchor',
         symbol: '#',
         space: true,
-        placement: 'before'
+        placement: 'before',
       }),
-      ...anchor
+      ...anchor,
     });
   }
 
@@ -124,8 +124,8 @@ export const createMarkdownRenderer = ({
       ...frontmatter,
       grayMatterOptions: {
         excerpt: false,
-        ...frontmatter?.grayMatterOptions
-      }
+        ...frontmatter?.grayMatterOptions,
+      },
     });
   }
 
@@ -134,7 +134,7 @@ export const createMarkdownRenderer = ({
     md.use<HeadersPluginOptions>(headersPlugin, {
       level: [2, 3],
       slugify,
-      ...headers
+      ...headers,
     });
   }
 
@@ -159,7 +159,7 @@ export const createMarkdownRenderer = ({
       level: [2, 3],
       slugify,
       linkTag: 'router-link',
-      ...toc
+      ...toc,
     });
   }
 
@@ -185,7 +185,7 @@ export const createMarkdownRenderer = ({
   md.use(reactDemo);
   md.use(vueDemo);
   md.use(include, {
-    currentPath: (env: any) => env.filePath
+    currentPath: (env: any) => env.filePath,
   });
 
   const render = md.render;
@@ -193,7 +193,7 @@ export const createMarkdownRenderer = ({
     const html = render.call(md, src);
     return {
       html,
-      data: {}
+      data: {},
     };
   };
   md.render = wrappedRender as any;

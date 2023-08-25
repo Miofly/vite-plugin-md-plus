@@ -76,7 +76,8 @@ const getPlaygroundRule =
         state.sCount[nextLine] - state.blkIndent < 4
       ) {
         // check rest of marker
-        for (pos = start + 1; pos <= max; pos++) if (state.src[pos] !== ':') break;
+        for (pos = start + 1; pos <= max; pos++)
+          if (state.src[pos] !== ':') break;
 
         // closing code fence must be at least as long as the opening one
         if (pos - start >= markerCount) {
@@ -108,7 +109,11 @@ const getPlaygroundRule =
     openToken.info = title;
     openToken.map = [startLine, nextLine - (autoClosed ? 1 : 0)];
 
-    state.md.block.tokenize(state, startLine + 1, nextLine - (autoClosed ? 1 : 0));
+    state.md.block.tokenize(
+      state,
+      startLine + 1,
+      nextLine - (autoClosed ? 1 : 0),
+    );
 
     const closeToken = state.push(`${name}_close`, 'template', -1);
 
@@ -139,7 +144,8 @@ const atMarkerRule =
     let index;
 
     // Check out the rest of the marker string
-    for (index = 0; index < atMarker.length; index++) if (atMarker[index] !== state.src[start + index]) return false;
+    for (index = 0; index < atMarker.length; index++)
+      if (atMarker[index] !== state.src[start + index]) return false;
 
     const markup = state.src.slice(start, start + index);
     const info = state.src.slice(start + index, max);
@@ -229,12 +235,14 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
       key: playgroundData.key,
       title: playgroundData.title || '',
       files: encodeURIComponent(JSON.stringify(playgroundData.files)),
-      settings: encodeURIComponent(JSON.stringify(playgroundData.settings || {}))
-    })
-  }
+      settings: encodeURIComponent(
+        JSON.stringify(playgroundData.settings || {}),
+      ),
+    }),
+  },
 ) => {
   md.block.ruler.before('fence', `${name}`, getPlaygroundRule(name), {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
 
   VALID_MARKERS.forEach(marker => {
@@ -244,7 +252,7 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
     // eslint-disable-next-line
     if (!md.block.ruler.__rules__.find(({ name }) => name === 'marker'))
       md.block.ruler.before('fence', 'tab', atMarkerRule(marker), {
-        alt: ['paragraph', 'reference', 'blockquote', 'list']
+        alt: ['paragraph', 'reference', 'blockquote', 'list'],
       });
   });
 
@@ -255,7 +263,7 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
       key: hash(`playground${index}-${info}`),
       title: encodeURIComponent(info),
       settings: {},
-      files: {}
+      files: {},
     };
 
     let currentKey: string | null = null;
@@ -272,12 +280,18 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
           // File rule must contain a valid file name
           if (!info) continue;
           currentKey = info;
-        } else if (type === 'import_open') playgroundData.importMap = currentKey = info || 'import-map.json';
+        } else if (type === 'import_open')
+          playgroundData.importMap = currentKey = info || 'import-map.json';
 
         if (type === 'setting_open') foundSettings = true;
         if (type === 'setting_close') foundSettings = false;
 
-        if (type === 'file_close' || type === 'import_close' || type === 'setting_close' || !content) {
+        if (
+          type === 'file_close' ||
+          type === 'import_close' ||
+          type === 'setting_close' ||
+          !content
+        ) {
           tokens[i].type = `${name}_empty`;
           tokens[i].hidden = true;
           continue;
@@ -286,13 +300,15 @@ export const playground: PluginWithOptions<PlaygroundOptions> = (
         // parse settings
         if (foundSettings) {
           if (type === 'fence' && info === 'json')
-            playgroundData.settings = <Record<string, unknown>>JSON.parse(content.trim());
+            playgroundData.settings = <Record<string, unknown>>(
+              JSON.parse(content.trim())
+            );
         }
         // add code block content
         else if (type === 'fence' && currentKey)
           playgroundData.files[currentKey] = {
             ext: info,
-            content: content
+            content: content,
           };
 
         tokens[i].type = `${name}_empty`;

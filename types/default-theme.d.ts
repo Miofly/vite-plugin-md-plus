@@ -146,7 +146,9 @@ export namespace DefaultTheme {
     collapsed?: boolean;
   }
 
-  export type SidebarItem = { text: string; link: string } | { text: string; link?: string; items: SidebarItem[] };
+  export type SidebarItem =
+    | { text: string; link: string }
+    | { text: string; link?: string; items: SidebarItem[] };
 
   // edit link -----------------------------------------------------------------
 

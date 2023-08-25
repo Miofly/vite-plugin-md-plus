@@ -8,7 +8,7 @@ export type {
   Header,
   DefaultTheme,
   PageDataPayload,
-  CleanUrlsMode
+  CleanUrlsMode,
 } from '../types/shared';
 
 export const EXTERNAL_URL_RE = /^[a-z]+:/i;
@@ -22,7 +22,7 @@ export const notFoundPageData: PageData = {
   description: 'Not Found',
   headers: [],
   frontmatter: { sidebar: false, layout: 'page' },
-  lastUpdated: 0
+  lastUpdated: 0,
 };
 
 function findMatchRoot(route: string, roots: string[]): string | undefined {
@@ -41,7 +41,10 @@ function findMatchRoot(route: string, roots: string[]): string | undefined {
   }
 }
 
-function resolveLocales<T>(locales: Record<string, T>, route: string): T | undefined {
+function resolveLocales<T>(
+  locales: Record<string, T>,
+  route: string,
+): T | undefined {
   const localeRoot = findMatchRoot(route, Object.keys(locales));
   return localeRoot ? locales[localeRoot] : undefined;
 }
@@ -56,7 +59,7 @@ export function createLangDictionary(siteData: {
     ? Object.keys(locales).reduce((langs, path) => {
         langs[path] = {
           label: locales![path].label,
-          lang: siteLocales[path].lang
+          lang: siteLocales[path].lang,
         };
         return langs;
       }, {} as Record<string, { lang: string; label: string }>)
@@ -64,23 +67,29 @@ export function createLangDictionary(siteData: {
 }
 
 // this merges the locales data to the main data by the route
-export function resolveSiteDataByRoute(siteData: SiteData, route: string): SiteData {
+export function resolveSiteDataByRoute(
+  siteData: SiteData,
+  route: string,
+): SiteData {
   route = cleanRoute(siteData, route);
 
   const localeData = resolveLocales(siteData.locales || {}, route);
-  const localeThemeConfig = resolveLocales<any>(siteData.themeConfig.locales || {}, route);
+  const localeThemeConfig = resolveLocales<any>(
+    siteData.themeConfig.locales || {},
+    route,
+  );
 
   // avoid object rest spread since this is going to run in the browser
   // and spread is going to result in polyfill code
   return Object.assign({}, siteData, localeData, {
     themeConfig: Object.assign({}, siteData.themeConfig, localeThemeConfig, {
       // clean the locales to reduce the bundle size
-      locales: {}
+      locales: {},
     }),
     lang: (localeData || siteData).lang,
     // clean the locales to reduce the bundle size
     locales: {},
-    langs: createLangDictionary(siteData)
+    langs: createLangDictionary(siteData),
   });
 }
 
@@ -100,7 +109,10 @@ export function createTitle(siteData: SiteData, pageData: PageData): string {
   return `${title}${templateString}`;
 }
 
-function createTitleTemplate(siteTitle: string, template?: string | boolean): string {
+function createTitleTemplate(
+  siteTitle: string,
+  template?: string | boolean,
+): string {
   if (template === false) {
     return '';
   }
@@ -135,7 +147,9 @@ function hasTag(head: HeadConfig[], tag: HeadConfig) {
   if (tagType !== 'meta') return false;
   const keyAttr = Object.entries(tagAttrs)[0]; // First key
   if (keyAttr == null) return false;
-  return head.some(([type, attrs]) => type === tagType && attrs[keyAttr[0]] === keyAttr[1]);
+  return head.some(
+    ([type, attrs]) => type === tagType && attrs[keyAttr[0]] === keyAttr[1],
+  );
 }
 
 export function mergeHead(prev: HeadConfig[], curr: HeadConfig[]) {

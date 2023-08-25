@@ -12,7 +12,7 @@ export const CODE_DEMO_DEFAULT_SETTING = {
   babel: 'https://unpkg.com/@babel/standalone/babel.min.js',
   vue: 'https://unpkg.com/vue/dist/vue.global.prod.js',
   react: 'https://unpkg.com/react/umd/react.production.min.js',
-  reactDOM: 'https://unpkg.com/react-dom/umd/react-dom.production.min.js'
+  reactDOM: 'https://unpkg.com/react-dom/umd/react-dom.production.min.js',
 };
 
 const getPlugin =
@@ -40,10 +40,12 @@ const getPlugin =
         return `
 <VftMdCodeDemo id="code-demo-${index}" type="${name.split('-')[0]}"${
           title ? ` title="${encodeURIComponent(title)}"` : ''
-        }${config ? ` config="${config}"` : ''} code="${utoa(JSON.stringify(code))}">
+        }${config ? ` config="${config}"` : ''} code="${utoa(
+          JSON.stringify(code),
+        )}">
 `;
       },
-      closeRender: () => '</VftMdCodeDemo>'
+      closeRender: () => '</VftMdCodeDemo>',
     });
 
 export const normalDemo: PluginSimple = getPlugin('normal-demo');

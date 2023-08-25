@@ -2,7 +2,11 @@ import type { Options, PluginWithOptions } from 'markdown-it';
 import type { RuleBlock } from 'markdown-it/lib/parser_block';
 import type Renderer from 'markdown-it/lib/renderer';
 import type Token from 'markdown-it/lib/token';
-import type { MarkdownItTabData, MarkdownItTabInfo, MarkdownItTabOptions } from './options';
+import type {
+  MarkdownItTabData,
+  MarkdownItTabInfo,
+  MarkdownItTabOptions,
+} from './options';
 import { escapeHtml } from './utils';
 
 const TAB_MARKER = '@tab';
@@ -84,19 +88,25 @@ const getTabRule =
 
     const openToken = state.push(`${name}_tab_open`, '', 1);
 
-    const [, title, id] = /^(.*?)(?:(?<!\\)#([^#]*))?$/.exec(info.replace(/^:active/, ''))!;
+    const [, title, id] = /^(.*?)(?:(?<!\\)#([^#]*))?$/.exec(
+      info.replace(/^:active/, ''),
+    )!;
 
     openToken.block = true;
     openToken.markup = markup;
     openToken.info = title.trim().replace(/\\#/g, '#');
     openToken.meta = {
-      active: info.includes(':active')
+      active: info.includes(':active'),
     };
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (id) openToken.meta.id = id.trim();
     openToken.map = [startLine, nextLine - (autoClosed ? 1 : 0)];
 
-    state.md.block.tokenize(state, startLine + 1, nextLine + (autoClosed ? 0 : 1));
+    state.md.block.tokenize(
+      state,
+      startLine + 1,
+      nextLine + (autoClosed ? 0 : 1),
+    );
 
     const closeToken = state.push(`${name}_tab_close`, '', -1);
 
@@ -168,7 +178,8 @@ const getTabsRule =
         state.sCount[nextLine] - state.blkIndent < 4
       ) {
         // check rest of marker
-        for (pos = start + 1; pos <= max; pos++) if (state.src[pos] !== ':') break;
+        for (pos = start + 1; pos <= max; pos++)
+          if (state.src[pos] !== ':') break;
 
         // closing code fence must be at least as long as the opening one
         if (pos - start >= markerCount) {
@@ -205,7 +216,11 @@ const getTabsRule =
 
     store.state = name;
 
-    state.md.block.tokenize(state, startLine + 1, nextLine - (autoClosed ? 1 : 0));
+    state.md.block.tokenize(
+      state,
+      startLine + 1,
+      nextLine - (autoClosed ? 1 : 0),
+    );
 
     store.state = originalState;
 
@@ -268,7 +283,7 @@ const getTabsDataGetter =
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             index: meta.index as number,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            ...(meta.id ? { id: meta.id as string } : {})
+            ...(meta.id ? { id: meta.id as string } : {}),
           });
 
           continue;
@@ -287,8 +302,8 @@ const getTabsDataGetter =
       active: activeIndex,
       data: tabData.map((data, index) => ({
         ...data,
-        active: index === activeIndex
-      }))
+        active: index === activeIndex,
+      })),
     };
   };
 
@@ -303,7 +318,7 @@ const tabDataGetter = (tokens: Token[], index: number): MarkdownItTabData => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     ...(meta.id ? { id: meta.id as string } : {}),
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    isActive: Boolean(meta.active)
+    isActive: Boolean(meta.active),
   };
 };
 
@@ -319,7 +334,7 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
       index: number,
       _options: Options,
       _env: unknown,
-      self: Renderer
+      self: Renderer,
     ): string => {
       const { active, data } = info;
       const token = tokens[index];
@@ -330,9 +345,11 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
 
       const tabs = data.map(
         ({ title, id }, index) =>
-          `<button type="button" class="${name}-tab-button${active === index ? ' active' : ''}" data-tab="${index}"${
-            id ? ` data-id="${escapeHtml(id)}"` : ''
-          }${active === index ? ' data-active' : ''}>${escapeHtml(title)}</button>`
+          `<button type="button" class="${name}-tab-button${
+            active === index ? ' active' : ''
+          }" data-tab="${index}"${id ? ` data-id="${escapeHtml(id)}"` : ''}${
+            active === index ? ' data-active' : ''
+          }>${escapeHtml(title)}</button>`,
       );
 
       return `\
@@ -353,11 +370,14 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
       index: number,
       _options: Options,
       _env: unknown,
-      self: Renderer
+      self: Renderer,
     ): string => {
       const token = tokens[index];
 
-      token.attrJoin('class', `${name}-tab-content${info.isActive ? ' active' : ''}`);
+      token.attrJoin(
+        'class',
+        `${name}-tab-content${info.isActive ? ' active' : ''}`,
+      );
       token.attrSet('data-index', info.index.toString());
       if (info.id) token.attrSet('data-id', info.id.toString());
 
@@ -366,20 +386,26 @@ export const tab: PluginWithOptions<MarkdownItTabOptions> = (md, options) => {
       return `<div${self.renderAttrs(tokens[index])}>`;
     },
 
-    tabCloseRenderer = (): string => '</div>'
+    tabCloseRenderer = (): string => '</div>',
   } = options || {};
 
   const tabsDataGetter = getTabsDataGetter(name);
 
   md.block.ruler.before('fence', `${name}_tabs`, getTabsRule(name, store), {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
 
   md.block.ruler.before('paragraph', `${name}_tab`, getTabRule(name, store), {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
 
-  md.renderer.rules[`${name}_tabs_open`] = (tokens, index, options, env, self): string => {
+  md.renderer.rules[`${name}_tabs_open`] = (
+    tokens,
+    index,
+    options,
+    env,
+    self,
+  ): string => {
     const info = tabsDataGetter(tokens, index);
 
     return tabsOpenRenderer(info, tokens, index, options, env, self);

@@ -13,8 +13,8 @@ export const uml: PluginWithOptions<MarkdownItUMLOptions> = (
       const { content, info, type } = token;
 
       return `<div class="${type}" title="${info}">${content}</div>`;
-    }
-  }
+    },
+  },
 ) => {
   const OPEN_MARKER = `@${open}`;
   const CLOSE_MARKER = `@${close}`;
@@ -32,7 +32,8 @@ export const uml: PluginWithOptions<MarkdownItUMLOptions> = (
     if (state.src.charAt(start) !== '@') return false;
 
     // Check out the rest of the marker string
-    for (i = 0; i < OPEN_MARKER.length; ++i) if (OPEN_MARKER[i] !== state.src[start + i]) return false;
+    for (i = 0; i < OPEN_MARKER.length; ++i)
+      if (OPEN_MARKER[i] !== state.src[start + i]) return false;
 
     const markup = state.src.slice(start, start + i);
     const params = state.src.slice(start + i, max);
@@ -108,7 +109,7 @@ export const uml: PluginWithOptions<MarkdownItUMLOptions> = (
   };
 
   md.block.ruler.before('fence', name, umlRule, {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
 
   md.renderer.rules[name] = render;

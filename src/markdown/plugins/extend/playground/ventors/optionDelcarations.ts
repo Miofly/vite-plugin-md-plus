@@ -51,8 +51,8 @@ export const optionDeclarations = [
       es2020: 7,
       es2021: 8,
       es2022: 9,
-      esnext: 99
-    }
+      esnext: 99,
+    },
   },
   {
     name: 'module',
@@ -68,8 +68,8 @@ export const optionDeclarations = [
       es2022: 7,
       esnext: 99,
       node16: 100,
-      nodenext: 199
-    }
+      nodenext: 199,
+    },
   },
   { name: 'lib', type: 'list' },
   { name: 'allowJs', type: 'boolean' },
@@ -81,8 +81,8 @@ export const optionDeclarations = [
       'react-native': 3,
       react: 2,
       'react-jsx': 4,
-      'react-jsxdev': 5
-    }
+      'react-jsxdev': 5,
+    },
   },
   { name: 'declaration', type: 'boolean' },
   { name: 'declarationMap', type: 'boolean' },
@@ -98,7 +98,7 @@ export const optionDeclarations = [
   { name: 'importHelpers', type: 'boolean' },
   {
     name: 'importsNotUsedAsValues',
-    type: { remove: 0, preserve: 1, error: 2 }
+    type: { remove: 0, preserve: 1, error: 2 },
   },
   { name: 'downlevelIteration', type: 'boolean' },
   { name: 'isolatedModules', type: 'boolean' },
@@ -121,7 +121,7 @@ export const optionDeclarations = [
   { name: 'noPropertyAccessFromIndexSignature', type: 'boolean' },
   {
     name: 'moduleResolution',
-    type: { node: 2, classic: 1, node16: 3, nodenext: 99 }
+    type: { node: 2, classic: 1, node16: 3, nodenext: 99 },
   },
   { name: 'baseUrl', type: 'string' },
   { name: 'paths', type: 'object' },
@@ -174,5 +174,5 @@ export const optionDeclarations = [
   { name: 'preserveValueImports', type: 'boolean' },
   { name: 'keyofStringsOnly', type: 'boolean' },
   { name: 'plugins', type: 'list' },
-  { name: 'moduleDetection', type: { auto: 2, legacy: 1, force: 3 } }
+  { name: 'moduleDetection', type: { auto: 2, legacy: 1, force: 3 } },
 ];

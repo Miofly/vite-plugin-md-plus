@@ -24,7 +24,8 @@ async function createMarkdown(options: any) {
       result = md.render(source);
     }
 
-    if (transforms.after) result = transforms.after({ result, source, file, md });
+    if (transforms.after)
+      result = transforms.after({ result, source, file, md });
 
     return result;
   };
@@ -73,7 +74,9 @@ tags:
           title = fileTitleArr[0];
           tagsStr = '';
           path = fileTitleArr[0];
-          cateStr = cateLabelStr ? os.EOL + 'category:' + os.EOL + '  - ' + 'api' + cateLabelStr : '';
+          cateStr = cateLabelStr
+            ? os.EOL + 'category:' + os.EOL + '  - ' + 'api' + cateLabelStr
+            : '';
         }
 
         const fmData = `---
@@ -83,7 +86,7 @@ path: /pages/${path}${cateStr}${tagsStr}
 ---\n`;
         fs.writeFileSync(filePath, `${fmData}${frontMatter.content}`); // 写入
       }
-    }
+    },
   };
 }
 

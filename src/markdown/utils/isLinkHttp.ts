@@ -5,4 +5,5 @@
  * - https://github.com
  * - //github.com
  */
-export const isLinkHttp = (link: string): boolean => /^(https?:)?\/\//.test(link);
+export const isLinkHttp = (link: string): boolean =>
+  /^(https?:)?\/\//.test(link);

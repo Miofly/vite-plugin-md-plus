@@ -1,4 +1,7 @@
-import { resolveHeadersFromTokens, slugify as defaultSlugify } from '@mdit-vue/shared';
+import {
+  resolveHeadersFromTokens,
+  slugify as defaultSlugify,
+} from '@mdit-vue/shared';
 import type MarkdownIt from 'markdown-it';
 import { createRenderHeaders } from './create-render-headers';
 import { createTocBlockRule } from './create-toc-block-rule';
@@ -24,8 +27,8 @@ export const tocPlugin: MarkdownIt.PluginWithOptions<TocPluginOptions> = (
     listClass = '',
     itemClass = '',
     linkTag = 'a',
-    linkClass = ''
-  }: TocPluginOptions = {}
+    linkClass = '',
+  }: TocPluginOptions = {},
 ): void => {
   // add toc syntax as a block rule
   md.block.ruler.before(
@@ -34,11 +37,11 @@ export const tocPlugin: MarkdownIt.PluginWithOptions<TocPluginOptions> = (
     createTocBlockRule({
       pattern,
       containerTag,
-      containerClass
+      containerClass,
     }),
     {
-      alt: ['paragraph', 'reference', 'blockquote']
-    }
+      alt: ['paragraph', 'reference', 'blockquote'],
+    },
   );
 
   // create the headers renderer from the options
@@ -47,7 +50,7 @@ export const tocPlugin: MarkdownIt.PluginWithOptions<TocPluginOptions> = (
     listClass,
     itemClass,
     linkTag,
-    linkClass
+    linkClass,
   });
 
   // custom toc_body render rule
@@ -65,7 +68,7 @@ export const tocPlugin: MarkdownIt.PluginWithOptions<TocPluginOptions> = (
         shouldAllowHtml: true,
         shouldEscapeText: true,
         slugify,
-        format
-      })
+        format,
+      }),
     );
 };

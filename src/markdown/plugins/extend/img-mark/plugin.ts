@@ -3,7 +3,10 @@ import type { MarkdownItImgMarkOptions } from './options';
 
 export const imgMark: PluginWithOptions<MarkdownItImgMarkOptions> = (
   md,
-  { light = ['gh-light-mode-only', 'light'], dark = ['gh-dark-mode-only', 'dark'] } = {}
+  {
+    light = ['gh-light-mode-only', 'light'],
+    dark = ['gh-dark-mode-only', 'dark'],
+  } = {},
 ): void => {
   const originalImageRender = md.renderer.rules.image!;
 

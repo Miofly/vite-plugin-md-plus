@@ -13,7 +13,11 @@ export const isLinkExternal = (link: string, base = '/'): boolean => {
   }
 
   // absolute link that does not start with `base` and does not end with `.md`
-  if (link.startsWith('/') && !link.startsWith(base) && !markdownLinkRegexp.test(link)) {
+  if (
+    link.startsWith('/') &&
+    !link.startsWith(base) &&
+    !markdownLinkRegexp.test(link)
+  ) {
     return true;
   }
 

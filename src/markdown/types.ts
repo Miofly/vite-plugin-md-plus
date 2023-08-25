@@ -14,7 +14,7 @@ import type {
   ImportCodePluginOptions,
   LinksPluginOptions,
   SfcPluginOptions,
-  TocPluginOptions
+  TocPluginOptions,
 } from './plugins';
 
 export type Markdown = MarkdownIt;

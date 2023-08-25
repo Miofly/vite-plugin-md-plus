@@ -40,7 +40,7 @@ const tokenize: RuleInline = (state, silent) => {
         token: state.tokens.length - 1,
         end: -1,
         open: scanned.can_open,
-        close: scanned.can_close
+        close: scanned.can_close,
       });
   }
 
@@ -53,7 +53,10 @@ const tokenize: RuleInline = (state, silent) => {
  * Walk through delimiter list and replace text tokens with tags
  *
  */
-const postProcess = (state: StateInline, delimiters: StateInline.Delimiter[]): void => {
+const postProcess = (
+  state: StateInline,
+  delimiters: StateInline.Delimiter[],
+): void => {
   let token;
   const loneMarkers = [];
   const max = delimiters.length;
@@ -78,7 +81,10 @@ const postProcess = (state: StateInline, delimiters: StateInline.Delimiter[]): v
       token.markup = '==';
       token.content = '';
 
-      if (state.tokens[endDelim.token - 1].type === 'text' && state.tokens[endDelim.token - 1].content === '=')
+      if (
+        state.tokens[endDelim.token - 1].type === 'text' &&
+        state.tokens[endDelim.token - 1].content === '='
+      )
         loneMarkers.push(endDelim.token - 1);
     }
   }
@@ -95,7 +101,8 @@ const postProcess = (state: StateInline, delimiters: StateInline.Delimiter[]): v
     const i = loneMarkers.pop()!;
     let j = i + 1;
 
-    while (j < state.tokens.length && state.tokens[j].type === 'mark_close') j += 1;
+    while (j < state.tokens.length && state.tokens[j].type === 'mark_close')
+      j += 1;
 
     j -= 1;
 

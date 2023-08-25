@@ -12,7 +12,10 @@ import type { MarkdownItTexOptions } from './options';
  * Test if potential opening or closing delimiter
  * Assumes that there is a "$" at state.src[pos]
  */
-const isValidDelim = (state: StateInline, pos: number): { canOpen: boolean; canClose: boolean } => {
+const isValidDelim = (
+  state: StateInline,
+  pos: number,
+): { canOpen: boolean; canClose: boolean } => {
   const prevChar = pos > 0 ? state.src.charAt(pos - 1) : '';
   const nextChar = pos + 1 <= state.posMax ? state.src.charAt(pos + 1) : '';
 
@@ -23,7 +26,11 @@ const isValidDelim = (state: StateInline, pos: number): { canOpen: boolean; canC
      * Check non-whitespace conditions for opening and closing, and
      * check that closing delimiter isn’t followed by a number
      */
-    canClose: !(prevChar === ' ' || prevChar === '\t' || /[0-9]/u.exec(nextChar))
+    canClose: !(
+      prevChar === ' ' ||
+      prevChar === '\t' ||
+      /[0-9]/u.exec(nextChar)
+    ),
   };
 };
 
@@ -168,13 +175,16 @@ const blockTex: RuleBlock = (state, start, end, silent) => {
 export const tex: PluginWithOptions<MarkdownItTexOptions> = (md, options) => {
   const { render } = options || {};
 
-  if (typeof render !== 'function') throw new Error('[@mdit/plugin-tex]: "render" option should be a function');
+  if (typeof render !== 'function')
+    throw new Error('[@mdit/plugin-tex]: "render" option should be a function');
 
   md.inline.ruler.after('escape', 'math_inline', inlineTex);
   md.block.ruler.after('blockquote', 'math_block', blockTex, {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
 
-  md.renderer.rules['math_inline'] = (tokens, index): string => render(tokens[index].content, false);
-  md.renderer.rules['math_block'] = (tokens, index): string => render(tokens[index].content, true);
+  md.renderer.rules['math_inline'] = (tokens, index): string =>
+    render(tokens[index].content, false);
+  md.renderer.rules['math_block'] = (tokens, index): string =>
+    render(tokens[index].content, true);
 };

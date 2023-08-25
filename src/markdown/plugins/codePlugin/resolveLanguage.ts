@@ -40,7 +40,7 @@ export const resolveLanguage = (info: string): HighlightLanguage => {
     getLanguagesMap()[alias] ?? {
       name: alias,
       ext: alias,
-      aliases: [alias]
+      aliases: [alias],
     }
   );
 };

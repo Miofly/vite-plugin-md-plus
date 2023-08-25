@@ -25,9 +25,11 @@ export const hint: PluginWithOptions = (md, options = {}) => {
           info = options[localePath]?.[name];
         }
 
-        return `<div class="hint-container ${name}">\n<p class="hint-container-title">${info || name}</p>\n`;
+        return `<div class="hint-container ${name}">\n<p class="hint-container-title">${
+          info || name
+        }</p>\n`;
       },
-      closeRender: () => '</div>\n'
+      closeRender: () => '</div>\n',
     });
   });
 
@@ -42,7 +44,7 @@ export const hint: PluginWithOptions = (md, options = {}) => {
           .trim()
           .slice(
             // length of "details"
-            7
+            7,
           )
           .trim();
 
@@ -55,9 +57,11 @@ export const hint: PluginWithOptions = (md, options = {}) => {
           info = options[localePath]?.details;
         }
 
-        return `<details class="hint-container details"><summary>${info || 'Details'}</summary>\n`;
+        return `<details class="hint-container details"><summary>${
+          info || 'Details'
+        }</summary>\n`;
       },
-      closeRender: () => '</details>\n'
-    })
+      closeRender: () => '</details>\n',
+    }),
   );
 };

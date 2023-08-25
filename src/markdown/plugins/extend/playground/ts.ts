@@ -1,13 +1,20 @@
 import { isPlainObject } from 'lodash';
 
 import type { CompilerOptions } from 'typescript';
-import type { PlaygroundData, PlaygroundOptions, TSPresetPlaygroundOptions } from '../../../types';
+import type {
+  PlaygroundData,
+  PlaygroundOptions,
+  TSPresetPlaygroundOptions,
+} from '../../../types';
 import { deepAssign } from '../../../utils/deepAssign';
 import { compressToEncodedURIComponent } from './ventors/lzstring';
 import { optionDeclarations } from './ventors/optionDelcarations';
 
 /** Gets a query string representation (hash + queries) */
-export const getURL = (code: string, compilerOptions: CompilerOptions = {}): string => {
+export const getURL = (
+  code: string,
+  compilerOptions: CompilerOptions = {},
+): string => {
   const hash = `#code/${compressToEncodedURIComponent(code)}`;
 
   const queryString = Object.entries(compilerOptions)
@@ -37,20 +44,30 @@ export const getTSPlaygroundPreset = ({
   ...compilerOptions
 }: TSPresetPlaygroundOptions = {}): PlaygroundOptions => ({
   name: 'playground#ts',
-  propsGetter: ({ title = '', files, settings, key }: PlaygroundData): Record<string, string> => {
+  propsGetter: ({
+    title = '',
+    files,
+    settings,
+    key,
+  }: PlaygroundData): Record<string, string> => {
     const tsfiles = Object.keys(files).filter(key => key.endsWith('.ts'));
 
-    if (tsfiles.length !== 1) console.error('TS playground only support 1 ts file');
+    if (tsfiles.length !== 1)
+      console.error('TS playground only support 1 ts file');
 
     const link = `${service}${getURL(
       files[tsfiles[0]].content,
-      deepAssign({}, <CompilerOptions>settings || {}, <CompilerOptions>compilerOptions)
+      deepAssign(
+        {},
+        <CompilerOptions>settings || {},
+        <CompilerOptions>compilerOptions,
+      ),
     )}`;
 
     return {
       key,
       title,
-      link: encodeURIComponent(link)
+      link: encodeURIComponent(link),
     };
-  }
+  },
 });

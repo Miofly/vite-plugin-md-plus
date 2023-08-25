@@ -6,8 +6,8 @@ export const align: PluginSimple = md => {
     md.use(md =>
       container(md, {
         name,
-        openRender: () => `<div style="text-align:${name}">\n`
-      })
-    )
+        openRender: () => `<div style="text-align:${name}">\n`,
+      }),
+    ),
   );
 };

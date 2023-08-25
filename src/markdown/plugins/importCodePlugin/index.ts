@@ -11,18 +11,35 @@ export interface ImportCodePluginOptions {
   handleImportPath?: (str: string) => string;
 }
 
-export const importCodePlugin: PluginWithOptions<ImportCodePluginOptions> = (md, options = {}): void => {
+export const importCodePlugin: PluginWithOptions<ImportCodePluginOptions> = (
+  md,
+  options = {},
+): void => {
   // add import_code block rule
-  md.block.ruler.before('fence', 'import_code', createImportCodeBlockRule(options), {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
-  });
+  md.block.ruler.before(
+    'fence',
+    'import_code',
+    createImportCodeBlockRule(options),
+    {
+      alt: ['paragraph', 'reference', 'blockquote', 'list'],
+    },
+  );
 
   // add import_code renderer rule
-  md.renderer.rules.import_code = (tokens, idx, options, env: MarkdownEnv, slf) => {
+  md.renderer.rules.import_code = (
+    tokens,
+    idx,
+    options,
+    env: MarkdownEnv,
+    slf,
+  ) => {
     const token = tokens[idx];
 
     // use imported code as token content
-    const { importFilePath, importCode } = resolveImportCode(token.meta, resolve(process.cwd(), 'src'));
+    const { importFilePath, importCode } = resolveImportCode(
+      token.meta,
+      resolve(process.cwd(), 'src'),
+    );
     token.content = importCode;
 
     // extract imported files to env

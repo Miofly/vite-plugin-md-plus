@@ -9,13 +9,17 @@ import type { ImgSizeEnv } from './types';
 
 // Parse image size
 //
-const parseNumber = (str: string, pos: number, max: number): { ok: boolean; pos: number; value: string } => {
+const parseNumber = (
+  str: string,
+  pos: number,
+  max: number,
+): { ok: boolean; pos: number; value: string } => {
   let char: string;
   const start = pos;
   const result = {
     ok: false,
     pos: pos,
-    value: ''
+    value: '',
   };
 
   char = str.charAt(pos);
@@ -34,13 +38,13 @@ const parseNumber = (str: string, pos: number, max: number): { ok: boolean; pos:
 const parseImageSize = (
   str: string,
   pos: number,
-  max: number
+  max: number,
 ): { ok: boolean; pos: number; width: string; height: string } => {
   const result = {
     ok: false,
     pos: 0,
     width: '',
-    height: ''
+    height: '',
   };
 
   if (pos >= max) return result;
@@ -243,7 +247,7 @@ const imgSizeRule: RuleInline = (state, silent) => {
 
     token.attrs = <[string, string][]>[
       ['src', href],
-      ['alt', '']
+      ['alt', ''],
     ];
     if (title) token.attrs.push(['title', title]);
     if (width !== '') token.attrs.push(['width', width]);
