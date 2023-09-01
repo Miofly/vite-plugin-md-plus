@@ -3,6 +3,7 @@
   "version": "0.0.24",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "pnpm clean:dist && pnpm stub",
@@ -13,8 +14,7 @@
     "clean:node_modules": "rimraf node_modules"
   },
   "files": [
-    "cjs",
-    "es"
+    "dist"
   ],
   "dependencies": {
     "@mdit-vue/plugin-component": "^0.12.0",
