@@ -1,14 +1,12 @@
 {
   "name": "vite-plugin-md-plus",
   "version": "0.0.24",
-  "main": "cjs/main.cjs",
-  "module": "es/main.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "type": "module",
   "scripts": {
-    "prebuild": "rimraf -rf dist",
-    "build": "rollup -c",
-    "stub": "rollup -c",
-    "dev": "rollup -c",
+    "build": "pnpm clean:dist && pnpm stub",
+    "stub": "unbuild --stub",
     "pub": "pnpm build && tsx ../../scripts/build/src/publish.ts --pkg vite-plugin/vite-plugin-md-plus",
     "clean": "pnpm /^clean:/",
     "clean:dist": "rimraf dist",
