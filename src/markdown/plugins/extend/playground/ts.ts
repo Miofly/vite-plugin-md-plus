@@ -26,7 +26,7 @@ export const getURL = (
       const { type } = item;
 
       if (isPlainObject(type)) {
-        const result = type[value as keyof typeof type];
+        const result: any = type[value as keyof typeof type];
 
         return result?.toString() || '';
       }

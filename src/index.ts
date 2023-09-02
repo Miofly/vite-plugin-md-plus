@@ -91,7 +91,7 @@ path: /pages/${path}${cateStr}${tagsStr}
 }
 
 function getcategory(filePath: string) {
-  const category = [];
+  const category: string[] = [];
 
   const filePathArr = filePath.split(path.sep); // path.sep用于兼容不同系统下的路径斜杠
   filePathArr.pop();

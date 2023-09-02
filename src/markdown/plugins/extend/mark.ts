@@ -58,7 +58,7 @@ const postProcess = (
   delimiters: StateInline.Delimiter[],
 ): void => {
   let token;
-  const loneMarkers = [];
+  const loneMarkers: number[] = [];
   const max = delimiters.length;
 
   for (let i = 0; i < max; i++) {

@@ -20,23 +20,23 @@
 //   0. You just DO WHAT THE FUCK YOU WANT TO.
 //
 
-const e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+const e = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$';
 
 const compress = (o: string, r: number, n: (pos: number) => string) => {
-  if (null == o) return "";
+  if (null == o) return '';
 
   let e,
     t,
     i,
     s = <Record<string, number>>{},
     p = <Record<string, boolean>>{},
-    u = "",
-    c = "",
-    a = "",
+    u = '',
+    c = '',
+    a = '',
     l = 2,
     f = 3,
     h = 2,
-    d = [],
+    d: (string | number)[] = [],
     m = 0,
     v = 0;
 
@@ -76,7 +76,7 @@ const compress = (o: string, r: number, n: (pos: number) => string) => {
       l--, 0 == l && ((l = Math.pow(2, h)), h++), (s[c] = f++), (a = String(u));
     }
 
-  if ("" !== a) {
+  if ('' !== a) {
     if (Object.prototype.hasOwnProperty.call(p, a)) {
       if (a.charCodeAt(0) < 256) {
         for (e = 0; h > e; e++)
@@ -117,7 +117,7 @@ const compress = (o: string, r: number, n: (pos: number) => string) => {
     v++;
   }
 
-  return d.join("");
+  return d.join('');
 };
 
 export const compressToEncodedURIComponent = (content: string) =>
