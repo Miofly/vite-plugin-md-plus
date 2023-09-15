@@ -1,4 +1,9 @@
-import { HeadConfig, LocaleConfig, PageData, SiteData } from '../types/shared';
+import type {
+  HeadConfig,
+  LocaleConfig,
+  PageData,
+  SiteData,
+} from '../types/shared';
 
 export type {
   SiteData,

@@ -1,5 +1,5 @@
 import type { PluginWithOptions } from 'markdown-it';
-import { MarkdownEnv } from '../../types';
+import { type MarkdownEnv } from '../../types';
 import { ensureLeadingSlash } from '../../utils/ensureLeadingSlash';
 import { resolveLocalePath } from '../../utils/resolveLocalePath';
 import { container } from './basic/container';
