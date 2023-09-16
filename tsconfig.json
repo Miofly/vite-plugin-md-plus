@@ -4,5 +4,5 @@
     "strict": false,
     "lib": ["dom"]
   },
-  "include": ["src"]
+  "include": ["src", "types"]
 }

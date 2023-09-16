@@ -12,11 +12,6 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "publishConfig": {
-    "main": "dist/index.js",
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
   "scripts": {
     "stub": "unbuild --stub",
     "dev": "pnpm stub",
