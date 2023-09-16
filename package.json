@@ -21,6 +21,9 @@
     "clean:dist": "rimraf dist",
     "clean:node_modules": "rimraf node_modules"
   },
+  "publishConfig": {
+    "main": "dist/index.js"
+  },
   "files": [
     "dist"
   ],
