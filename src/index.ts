@@ -44,7 +44,8 @@ async function markdownPlugin(userOptions = {}) {
     resolveId(id: any) {
       if (!id.endsWith('.md')) return null;
 
-      const filePath = join(process.cwd(), id);
+      const filePath = join(id);
+
       const fileContent = fs.readFileSync(filePath, 'utf8');
       const frontMatter = matter(fileContent, {});
 
