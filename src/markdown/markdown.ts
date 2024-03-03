@@ -68,18 +68,13 @@ export const createMarkdownRenderer = ({
   ...markdownItOptions
 }: MarkdownOptions = {}): Markdown => {
   const md = MarkdownIt({
-    // 在源码中启用 HTML 标签
     html: true,
-    // 将类似 URL 的文本自动转换为链接
+
     linkify: true,
-    // 使用 '/' 来闭合单标签 （比如 <br />）
     xhtmlOut: false,
-    // 转换段落里的 '\n' 到 <br>
+
     breaks: false,
-    // 给围栏代码块的 CSS 语言前缀。对于额外的高亮代码非常有用
-    langPrefix: 'language-',
-    // 启用一些语言中立的替换 + 引号美化
-    typographer: false,
+
     // 高亮函数，会返回转义的HTML
     highlight,
     ...markdownItOptions,
