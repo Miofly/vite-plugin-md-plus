@@ -22,7 +22,7 @@ export { emojiPlugin, type EmojiPluginOptions } from './plugins/emojiPlugin';
 //   importCodePlugin,
 //   type ImportCodePluginOptions,
 // } from './plugins/importCodePlugin';
-// export { linksPlugin, type LinksPluginOptions } from './plugins/linksPlugin';
+export { linksPlugin, type LinksPluginOptions } from './plugins/linksPlugin';
 
 // export { highlight } from './plugins/highlight';
 
