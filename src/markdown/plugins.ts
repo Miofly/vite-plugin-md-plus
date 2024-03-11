@@ -18,10 +18,10 @@ export { anchorPlugin, type AnchorPluginOptions } from './plugins/anchorPlugin';
 export { assetsPlugin, type AssetsPluginOptions } from './plugins/assetsPlugin';
 export { codePlugin, type CodePluginOptions } from './plugins/codePlugin';
 export { emojiPlugin, type EmojiPluginOptions } from './plugins/emojiPlugin';
-// export {
-//   importCodePlugin,
-//   type ImportCodePluginOptions,
-// } from './plugins/importCodePlugin';
+export {
+  importCodePlugin,
+  type ImportCodePluginOptions,
+} from './plugins/importCodePlugin';
 export { linksPlugin, type LinksPluginOptions } from './plugins/linksPlugin';
 
 // export { highlight } from './plugins/highlight';
