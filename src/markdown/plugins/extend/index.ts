@@ -10,6 +10,6 @@ export { imgMark } from './img-mark';
 export { imgSize } from './img-size';
 export { imgLazyload } from './img-lazyload';
 export { figure } from './figure';
-export { playground } from './playground';
-export { vuePlayground } from './vuePlayground';
+// export { playground } from './playground';
+// export { vuePlayground } from './vuePlayground';
 export { normalDemo, vueDemo, reactDemo } from './codeDemo';
