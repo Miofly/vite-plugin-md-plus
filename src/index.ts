@@ -1,4 +1,1 @@
-// export * from './markdown/plugins';
-export function test() {
-  return 1;
-}
+export * from './markdown/plugins';
