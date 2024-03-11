@@ -1,20 +1,16 @@
 import { isPlainObject } from 'lodash';
 
-import type { CompilerOptions } from 'typescript';
 import type {
   PlaygroundData,
   PlaygroundOptions,
   TSPresetPlaygroundOptions,
-} from '../../../types';
+} from './types';
 import { deepAssign } from '../../../utils/deepAssign';
 import { compressToEncodedURIComponent } from './ventors/lzstring';
 import { optionDeclarations } from './ventors/optionDelcarations';
 
 /** Gets a query string representation (hash + queries) */
-export const getURL = (
-  code: string,
-  compilerOptions: CompilerOptions = {},
-): string => {
+export const getURL = (code: string, compilerOptions = {}): string => {
   const hash = `#code/${compressToEncodedURIComponent(code)}`;
 
   const queryString = Object.entries(compilerOptions)
@@ -57,11 +53,7 @@ export const getTSPlaygroundPreset = ({
 
     const link = `${service}${getURL(
       files[tsfiles[0]].content,
-      deepAssign(
-        {},
-        <CompilerOptions>settings || {},
-        <CompilerOptions>compilerOptions,
-      ),
+      deepAssign({}, settings || {}, compilerOptions),
     )}`;
 
     return {

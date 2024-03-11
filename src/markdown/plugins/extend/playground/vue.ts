@@ -2,7 +2,7 @@ import type {
   PlaygroundData,
   PlaygroundOptions,
   VuePresetPlaygroundOptions,
-} from '../../../types';
+} from './types';
 import { deepAssign } from '../../../utils/deepAssign';
 
 const VUE_SUPPORTED_EXTENSIONS = [

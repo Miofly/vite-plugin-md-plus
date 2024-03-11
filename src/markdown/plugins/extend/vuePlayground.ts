@@ -1,5 +1,5 @@
 import type { PluginSimple } from 'markdown-it';
-import type { PlaygroundData, VuePlaygroundOptions } from '../../types';
+import type { PlaygroundData, VuePlaygroundOptions } from './playground/types';
 import { playground } from './playground/index';
 
 export const DEFAULT_VUE_PLAYGROUND_OPTIONS: VuePlaygroundOptions = {

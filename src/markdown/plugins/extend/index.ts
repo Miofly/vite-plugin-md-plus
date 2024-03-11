@@ -11,7 +11,6 @@ export { imgLazyload } from './img-lazyload';
 export { figure } from './figure';
 export { normalDemo, vueDemo, reactDemo } from './codeDemo';
 
-// export { tasklist } from './tasklist';
-
-// export { playground } from './playground';
-// export { vuePlayground } from './vuePlayground';
+export { tasklist } from './tasklist';
+export { playground } from './playground';
+export { vuePlayground } from './vuePlayground';

@@ -1,7 +1,7 @@
 import hash from 'hash-sum';
 import type { PluginWithOptions } from 'markdown-it';
 import type { RuleBlock } from 'markdown-it/lib/parser_block';
-import type { PlaygroundData, PlaygroundOptions } from '../../../types';
+import type { PlaygroundData, PlaygroundOptions } from './types';
 
 const AT_MARKER = '@';
 const VALID_MARKERS = ['file', 'import', 'setting'];
