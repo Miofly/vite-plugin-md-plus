@@ -5,6 +5,7 @@
 import type { PluginWithOptions } from 'markdown-it';
 import type StateCore from 'markdown-it/lib/rules_core/state_core';
 import Token from 'markdown-it/lib/token';
+import MarkdownIt from 'markdown-it';
 import type { MarkdownItTaskListOptions } from './options';
 import type { TaskListEnv } from './types';
 import {
@@ -14,6 +15,7 @@ import {
   isParagraphToken,
   setTokenAttr,
 } from './utils';
+var md = new MarkdownIt();
 
 interface TaskListStateCore extends StateCore {
   env: TaskListEnv;
@@ -21,24 +23,24 @@ interface TaskListStateCore extends StateCore {
 // The leading whitespace in a list item (token.content) is already trimmed off by markdown-it.
 // The regex below checks for '[ ] ' or '[x] ' or '[X] ' at the start of the string token.content,
 // where the space is either a normal space or a non-breaking space (character 160 = \u00A0).
-const startsWithTodoMarkdown = (token: Token): boolean =>
+const startsWithTodoMarkdown = (token): boolean =>
   /^\[[xX \u00A0]\][ \u00A0]/.test(token.content);
 
-const isTaskListItem = (tokens: Token[], index: number): boolean =>
+const isTaskListItem = (tokens: any[], index: number): boolean =>
   isInlineToken(tokens[index]) &&
   isParagraphToken(tokens[index - 1]) &&
   isListItemToken(tokens[index - 2]) &&
   startsWithTodoMarkdown(tokens[index]);
 
 const generateCheckbox = (
-  token: Token,
+  token,
   id: string,
   {
     checkboxClass,
     disabled,
   }: Required<Pick<MarkdownItTaskListOptions, 'checkboxClass' | 'disabled'>>,
-): Token => {
-  const checkbox = new Token('checkbox_input', 'input', 0);
+) => {
+  const checkbox = new MarkdownIt.('checkbox_input', 'input', 0);
 
   checkbox.attrs = [
     ['type', 'checkbox'],
@@ -55,8 +57,8 @@ const generateCheckbox = (
   return checkbox;
 };
 
-const beginLabel = (id: string, labelClass: string): Token => {
-  const label = new Token('label_open', 'label', 1);
+const beginLabel = (id: string, labelClass: string) => {
+  const label = new M('label_open', 'label', 1);
 
   label.attrs = [
     ['class', labelClass],
@@ -66,10 +68,10 @@ const beginLabel = (id: string, labelClass: string): Token => {
   return label;
 };
 
-const endLabel = (): Token => new Token('label_close', 'label', -1);
+const endLabel = () => new ClassToken('label_close', 'label', -1);
 
 const addCheckBox = (
-  token: Token,
+  token,
   state: TaskListStateCore,
   {
     disabled,
