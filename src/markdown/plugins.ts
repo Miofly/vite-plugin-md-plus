@@ -24,6 +24,6 @@ export {
 } from './plugins/importCodePlugin';
 export { linksPlugin, type LinksPluginOptions } from './plugins/linksPlugin';
 
-// export { highlight } from './plugins/highlight';
+export { highlight } from './plugins/highlight';
 
 export * from './plugins/extend';
