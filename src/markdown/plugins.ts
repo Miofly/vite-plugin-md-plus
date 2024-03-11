@@ -26,4 +26,4 @@ export { emojiPlugin, type EmojiPluginOptions } from './plugins/emojiPlugin';
 
 // export { highlight } from './plugins/highlight';
 
-// export * from './plugins/extend';
+export * from './plugins/extend';
