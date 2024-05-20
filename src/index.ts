@@ -39,9 +39,9 @@ function generationFrontMatter(id) {
 {
   path: '/pages/${path}',
   meta: {
-    title: '${title}'
+    title: '${title}',
     date: '${formatToDateTime(stat.ctime)}',
-    category: ${JSON.stringify(category)}
+    category: ${JSON.stringify(category)},
     tag: []
   }
 }
