@@ -52,7 +52,7 @@ function generationFrontMatter(id) {
   }
 }
 
-export function viteMdForntMatter() {
+export function viteMdFrontMatter() {
   return {
     name: 'vite-add-md-info',
     enforce: 'pre',
