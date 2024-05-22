@@ -1,7 +1,6 @@
 import { buildShortUUID, formatToDateTime } from '@vft/utils';
 import fs from 'fs-extra';
 import { basename, join, sep } from 'path';
-import type { PluginOption } from 'vite';
 
 /**
  * @description 生成 md 上方的信息
@@ -59,7 +58,7 @@ export function viteMdFrontMatter() {
     resolveId(id) {
       generationFrontMatter(id);
     },
-  } as PluginOption;
+  }
 }
 
 function getCategory(filePath: string) {

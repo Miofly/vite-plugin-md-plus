@@ -34,18 +34,18 @@ import {
   linksPlugin,
   mark,
   normalDemo,
-  playground,
   reactDemo,
   sfcPlugin,
   sub,
   sup,
   tabs,
-  tasklist,
   titlePlugin,
   tocPlugin,
   vueDemo,
-  vuePlayground,
 } from './plugins';
+import { playground } from './plugins/extend/playground';
+import { tasklist } from './plugins/extend/tasklist';
+import { vuePlayground } from './plugins/extend/vuePlayground';
 import type { Markdown, MarkdownOptions } from './types';
 
 export const createMarkdownRenderer = ({
@@ -169,11 +169,11 @@ export const createMarkdownRenderer = ({
   md.use(sub);
   md.use(sup);
   md.use(align);
-  md.use(tasklist);
   md.use(figure);
   md.use(imgSize);
   md.use(imgMark);
   md.use(imgLazyload);
+  md.use(tasklist);
   md.use(playground);
   md.use(vuePlayground);
   md.use(normalDemo);

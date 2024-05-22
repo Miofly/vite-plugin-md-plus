@@ -63,6 +63,7 @@ export const tocPlugin: MarkdownIt.PluginWithOptions<TocPluginOptions> = (
   // in most cases there is only one toc per page.
   md.renderer.rules.toc_body = tokens =>
     renderHeaders(
+      // @ts-ignore
       resolveHeadersFromTokens(tokens, {
         level,
         shouldAllowHtml: true,
