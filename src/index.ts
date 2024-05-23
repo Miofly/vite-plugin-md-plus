@@ -58,7 +58,7 @@ export function viteMdFrontMatter() {
     resolveId(id) {
       generationFrontMatter(id);
     },
-  }
+  };
 }
 
 function getCategory(filePath: string) {
