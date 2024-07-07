@@ -12,7 +12,7 @@ export {
 } from '@mdit-vue/plugin-headers';
 export { sfcPlugin, type SfcPluginOptions } from '@mdit-vue/plugin-sfc';
 export { titlePlugin } from '@mdit-vue/plugin-title';
-export { tocPlugin, type TocPluginOptions } from '@mdit-vue/plugin-toc';
+export { tocPlugin, type TocPluginOptions } from './plugins/toc';
 
 export { anchorPlugin, type AnchorPluginOptions } from './plugins/anchorPlugin';
 export { assetsPlugin, type AssetsPluginOptions } from './plugins/assetsPlugin';
