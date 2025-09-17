@@ -1,6 +1,5 @@
 import type { MarkdownSfcBlocks } from '@mdit-vue/plugin-sfc';
 import type { MarkdownItEnv } from '@mdit-vue/types';
-import type { SFCOptions } from '@vue/repl';
 // import type { PageFrontmatter, PageHeader } from '@vuepress/shared';
 import type MarkdownIt from 'markdown-it';
 import type {
